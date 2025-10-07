@@ -1,11 +1,29 @@
 import crewData from "./crewData.js";
+import shipSpacesData from "./shipSpacesData.js";
+import locationsData from "./locationsData.js";
+import missions from "./missions.js";
+
+class ShipRoom {
+    constructor({name, description}) {
+        this.name = name;
+        this.description = description;
+    }
+}
+
+class Location {
+    constructor({name, description}) {
+        this.name = name;
+        this.description = description;
+    }
+}
 
 class CrewMember {
-    constructor({name, role, description, catchphrase}) {
+    constructor({name, role, description, catchphrase, drunken_message}) {
         this.name = name;
         this.role = role;
         this.description = description;
         this.catchphrase = catchphrase; 
+        this.drunken_message = drunken_message;
     }
 
     talk() {
@@ -49,6 +67,9 @@ const starship = {
         new Item('artifact', 'Mysterious object stole-I mean, found, on some space mission', 1),
     ],
 
+    ship_rooms: Object.entries(shipSpacesData).map(item => new ShipRoom(item[1])),
+    locations: Object.entries(locationsData).map(item => new Location(item[1])),
+
     greetCrew: function() {
         this.crew.forEach(member => console.log(member.catchphrase));
     },
@@ -58,8 +79,65 @@ const starship = {
     },
 
     throwParty: function() {
-        this.technical_stats.crew_morale += 20;
-        console.log('Whoo! hey DJ, turn that music up!');
+        const boozeUsed = Math.ceil(Math.random() * (4 - 1) + 1);
+
+        if (this.technical_stats.hull_integrity < 15) {
+            console.log('Ship too broken to party. The speakers short-circuited and started playing whale mating calls…');
+            return;
+        }
+        
+        if (this.technical_stats.crew_morale >= 85) {
+            console.log("Morale is already sky-high. No need for another party!")
+        } else {
+            if (boozeUsed > this.inventory.find(item => item.item === 'space rum').amount) {
+                console.log("Not enough booze to party... Morale drops even lower");
+                this.technical_stats.crew_morale -= Math.ceil(Math.random() * (20 - 10) + 10);
+                if (this.technical_stats.crew_morale < 0) {
+                    this.technical_stats.crew_morale = 0;
+                }
+            } else {
+                this.technical_stats.crew_morale += Math.ceil(Math.random() * (30 - 15) + 15);
+                this.inventory.find(item => item.item === 'space rum').amount -= boozeUsed;
+                console.log(this.inventory.find(item => item.item === 'space rum').amount);
+
+                if (this.technical_stats.crew_morale > 100) {
+                    this.technical_stats.crew_morale = 100;
+                }
+                console.log('Whoo! hey DJ, turn that music up!');
+                console.log(this.crew[Math.floor(Math.random() * this.crew.length)].drunken_message)
+                
+                setTimeout(() => {
+                    console.log('🎉 The crew throws a wild party! Morale is up!');
+                }, 1000);
+            }
+
+        } 
         return this.technical_stats.crew_morale;
+    },
+
+    checkBooze: function() {
+        if (this.inventory.find(item => item.item === 'space rum').amount === 0) {
+            console.log("Hey, space rats! We're out of booze! We need to stop by Planet Base before Doc starts hallucinating.")
+        }
+    },
+
+    missions: missions,
+
+    checkFuel: function() {
+        if (this.technical_stats.fuel_level <= 0) {
+            console.log("Folks, we’re out of fuel again.")
+        }
+    },
+
+    checkDamage: function() {
+        if (this.technical_stats.hull_integrity <= 0 || this.technical_stats.shield_strength <= 0) {
+            console.log("Too much damage, the ship is in critical condition")
+        }
+    },
+
+    checkMorale: function() {
+        if (this.technical_stats.crew_morale <= 0) {
+            console.log("Morale is so low the crew is basically depressed. Let's liven up the place")
+        }
     }
 }
