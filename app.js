@@ -4,9 +4,14 @@ import locationsData from "./locationsData.js";
 import missions from "./missions.js";
 
 class ShipRoom {
-    constructor({name, description}) {
+    constructor({name, description, action}) {
         this.name = name;
         this.description = description;
+        this.action = action;
+    }
+
+    goTo() { 
+        console.log(`You're in the ${this.name}. ${this.action}`);
     }
 }
 
