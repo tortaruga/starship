@@ -8,12 +8,69 @@
 </head>
 <body>
     <main>
-        <div class="container">
-            <div class="top-bar">this is the top bar</div>
+        <div class="container"> 
+            <!-- topbar -->
+            <div class="top-bar">
+                <p class="top-bar-shipname">Clunkerfly</p>
+                <div class="current-status">
+                    <span>current status, some weird long sentence</span>
+                </div>
+                <button id="disco-switch">disco switch toggle</button>
+            </div>
+            <!-- mobile navbar  -->
             <button id="menu-button">this is the nav button</button>
             <div class="collapsible-nav hide">this is the collapsible nav</div>
-            <div class="left-sidebar">this is the left sidebar</div>
-            <div class="center-panel">this is the center panel</div>
+            <!-- navigation sidebar -->
+            <div class="left-sidebar">
+                <ul> 
+                    <li><button class="nav-btn" data-label="generic">generic</button></li>
+                    <li><button class="nav-btn" data-label="crew">crew</button></li>
+                    <li><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
+                    <li><button class="nav-btn" data-label="cargo">cargo</button></li>
+                    <li><button class="nav-btn" data-label="rooms">rooms</button></li>
+                </ul>
+            </div>
+
+            <!-- center panel (here we go... react would have been nice here, eh?) -->
+            <div class="center-panel">
+                <!-- generic -->
+                 <div class="center-panel-content" id="generic-info">
+                    <h1>Starship Generics</h1>
+                    <p id="starship-name">name: </p>
+                    <p id="starship-model">model: </p>
+                    <p id="starship-description">description: </p>
+                 </div>
+                 <!-- crew -->
+                  <div class="center-panel-content" id="crew-info">
+                    <h1>Crew</h1>
+                    <ul id="crew-list"></ul>
+
+                    <div id="member-card" class="hide">
+                        <button id="back-to-crew-list">go back</button>
+                        <p class="member-name">name</p>
+                        <p class="member-role">role</p>
+                        <p class="member-description">description</p>
+                        <button id="talk-button">say hello</button>
+                        <p id="member-message"></p>
+                    </div>
+                  </div>
+
+                 <!-- system -->
+                  <div class="center-panel-content" id="ship-systems-info">
+                    ship systems info
+                  </div>
+
+                 <!-- rooms -->
+                  <div class="center-panel-content" id="rooms-info">
+                    rooms info
+                  </div>
+
+                  <!-- cargo -->
+                  <div class="center-panel-content" id="cargo-info">
+                    cargo info
+                  </div>
+
+            </div>
             <div class="right-sidebar">this is the right sidebar</div>
             <div class="bottom-bar">this is the mysterious bottom bar</div>
         </div>

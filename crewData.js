@@ -26,7 +26,7 @@ export default {
     byte: {
         name: 'Byte',
         role: 'Hacker',
-        description: 'A hacker who lives in the crawlspaces and never uses doors, instead creeping through maintenance shafts and popping out of vents. he "upgrades" the ship by frankensteining together salvaged tech, broken gadgets, and whatever random junk the crew hauls in.  He always carries a worn bunny keychain named “Patch,” and sometimes whispers to it when he thinks no one’s watching.',
+        description: 'A hacker who lives in the crawlspaces and never uses doors, instead creeping through maintenance shafts and popping out of vents. He "upgrades" the ship by frankensteining together salvaged tech, broken gadgets, and whatever random junk the crew hauls in.  He always carries a worn bunny keychain named “Patch,” and sometimes whispers to it when he thinks no one’s watching.',
         catchphrase: 'Yes, I know it sparks – that means it\'s working.',
         drunken_message: 'I just had a BRILLIANT idea: I\'m gonna re-route the quantum flux through the toaster!'
     },
@@ -34,7 +34,7 @@ export default {
     carrot: {
         name: 'Carrot',
         role: 'Cook',
-        description: 'A cook who can whip up a meal from anything—edible or otherwise. A former convict turned space hustler, he’s filled with bizarre and extremely specific superstitions (never cooks while facing Jupiter, refuses to dice onions on Tuesdays). He reads the future using a battered deck of poker cards, and while no one takes his predictions seriously, they still urge him "Ask your cards" when in doubt about something. He is unnervingly skilled with any blade, and keeps a stash of secret ingredients labeled "DO NOT ASK".',
+        description: 'A cook who can whip up a meal from anything—edible or otherwise. A former convict turned space hustler, he’s filled with bizarre and extremely specific superstitions (never cooks while facing Jupiter, refuses to dice onions on Tuesdays). He reads the future using an ancient deck of poker cards, and while no one takes his predictions seriously, they still urge him "Ask your cards" when in doubt about something. He is unnervingly skilled with any blade, and keeps a stash of secret ingredients labeled "DO NOT ASK".',
         catchphrase: 'The stew bubbles clockwise... we’re in trouble.',
         drunken_message: 'Zzzzzzzzzzzz...',
     },

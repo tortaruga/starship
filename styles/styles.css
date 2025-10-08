@@ -7,6 +7,17 @@ body {
   padding: 1rem;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .container {
   background-color: aqua;
   padding: 1rem;
@@ -24,7 +35,7 @@ body {
   background-color: violet;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  text-align: center;
+  overflow: auto;
 }
 
 .left-sidebar {
@@ -33,6 +44,46 @@ body {
 
 .hide {
   display: none;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.current-status {
+  padding: 0.5rem;
+  letter-spacing: 0.06rem;
+  width: 30%;
+  overflow: hidden;
+}
+.current-status span {
+  white-space: nowrap;
+  display: inline-block;
+  transform: translateX(120%);
+  animation: marquee 10s steps(20) both infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-120%);
+  }
+}
+.left-sidebar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.left-sidebar ul li {
+  border-radius: 0.25rem;
+  background-color: bisque;
+}
+.left-sidebar ul li button {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
 }
 
 @media screen and (min-width: 600px) {

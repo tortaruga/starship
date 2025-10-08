@@ -32,7 +32,7 @@ class CrewMember {
     }
 
     talk() {
-        console.log(this.catchphrase);
+        return this.catchphrase;
     }
 };
 
@@ -146,3 +146,108 @@ const starship = {
         }
     }
 }
+
+
+const currentStatusOptions = [
+  "Drifting near asteroid belt",
+  "Peacefully floating into darkness",
+  "Just barely avoiding collision with supernovas",
+  "Losing speed, Grease do something about it, thx",
+  "Passing through Enchanted Nebula",
+  "Fleeing from angry thugs we sold fake artifacts to",
+  "Hiding from Space Financial Police",
+  "Right engine about to fail",
+  "Hit a random rock, sorry about that",
+  "Floating next to Laika the space dog, guys, say hi!",
+  "Taking scenic route even though we're being chased by rival pirates",
+  "High speed chase with some criminals who tried to steal our cargo",
+  "Narrowingly escaping from Interstellar Police",
+  "Stealthily avoiding encounter with the Cosmic Cops",
+  "All good, for once",
+  "Caught in a Space Storm",
+];
+
+
+const currentStatusSpan = document.querySelector('.current-status span');
+
+function setCurrentStatus() {
+    const randomIndex = Math.floor(Math.random() * currentStatusOptions.length);
+    currentStatusSpan.textContent = `current status: ${currentStatusOptions[randomIndex]}`;
+    handleStatusAnimationStep(currentStatusSpan.textContent);
+
+}
+
+setCurrentStatus();
+const statusIntervalTime = 1000 * 60 * 3;
+setInterval(setCurrentStatus, statusIntervalTime);  
+
+function handleStatusAnimationStep(string) {
+    const messageLength = string.length;
+    const stepValue = messageLength / 1.2;   
+    currentStatusSpan.style.animationTimingFunction = `steps(${stepValue})`;
+} 
+
+// add functionality to nav buttons
+const navBtns = document.querySelectorAll('.nav-btn');
+
+navBtns.forEach(btn => btn.addEventListener('click', (e) => showSelectedContent(e.target.dataset.label)));
+
+function showSelectedContent(selected) {
+    // grab all center-panel-content elements
+    // give all of them the class hide
+    // remove the class hide from the content matching selected id
+    document.querySelectorAll('.center-panel-content').forEach(div => div.classList.add('hide'));
+    document.getElementById(`${selected}-info`).classList.remove('hide');
+}
+
+showSelectedContent('generic'); // show generic by default
+
+// populate center panel
+  // generic
+function populateGenericInfoPanel() {
+    document.getElementById('starship-name').textContent = `name: ${starship.name}`;
+    document.getElementById('starship-model').textContent = `model: ${starship.model}`;
+    document.getElementById('starship-description').textContent = `${starship.description}`;
+}
+
+populateGenericInfoPanel();
+
+  // crew
+
+function createMemberButton(id) {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    button.textContent = id + ' >';
+    button.setAttribute('id', id.toLowerCase().replaceAll(' ', ''));
+    button.addEventListener('click', () => showMemberCard(id));
+    li.appendChild(button);
+    document.querySelector('#crew-list').appendChild(li);
+}
+
+function populateCrewList() {
+    starship.crew.forEach(member => createMemberButton(member.name)); 
+}
+
+populateCrewList();
+
+function showMemberCard(id) {
+    document.getElementById('crew-list').classList.add('hide');
+    document.getElementById('member-card').classList.remove('hide');
+    populateMemberCard(id);
+}  
+
+function populateMemberCard(id) {
+    document.querySelector('.member-name').textContent = `name: ${starship.crew.find(member => member.name === id).name}`;
+    document.querySelector('.member-role').textContent = `role: ${starship.crew.find(member => member.name === id).role}`;
+    document.querySelector('.member-description').textContent = `${starship.crew.find(member => member.name === id).description}`;
+
+    document.getElementById('talk-button').addEventListener('click', () => {
+        document.getElementById('member-message').textContent = starship.crew.find(member => member.name === id).talk();
+    }) 
+}
+ 
+document.getElementById('back-to-crew-list').addEventListener('click', () => {
+    document.getElementById('crew-list').classList.remove('hide');
+    document.getElementById('member-card').classList.add('hide');
+    document.getElementById('member-message').textContent = ''; 
+})
