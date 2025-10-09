@@ -19,7 +19,17 @@
             </div>
             <!-- mobile navbar  -->
             <button id="menu-button">this is the nav button</button>
-            <div class="collapsible-nav hide">this is the collapsible nav</div>
+            <div class="collapsible-nav hide">
+                <ul> 
+                    <li><button class="nav-btn" data-label="generic">generic</button></li>
+                    <li><button class="nav-btn" data-label="crew">crew</button></li>
+                    <li><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
+                    <li><button class="nav-btn" data-label="cargo">cargo</button></li>
+                    <li><button class="nav-btn" data-label="rooms">rooms</button></li>
+                    <li><button class="nav-btn" data-label="locations">locations</button></li>
+                    <li><button class="nav-btn" data-label="missions">missions</button></li>
+                </ul>
+            </div>
             <!-- navigation sidebar -->
             <div class="left-sidebar">
                 <ul> 
@@ -28,6 +38,8 @@
                     <li><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
                     <li><button class="nav-btn" data-label="cargo">cargo</button></li>
                     <li><button class="nav-btn" data-label="rooms">rooms</button></li>
+                    <li><button class="nav-btn" data-label="locations">locations</button></li>
+                    <li><button class="nav-btn" data-label="missions">missions</button></li>
                 </ul>
             </div>
 
@@ -110,9 +122,58 @@
                     <ul id="cargo-list"></ul>
                   </div>
 
+                  <!-- locations -->
+                   <div class="center-panel-content" id="locations-info">
+                    <h1>Locations</h1>
+                    <ul id="location-list"></ul>
+                   </div>
+
+                   <!-- missions -->
+                    <div class="center-panel-content" id="missions-info">
+                        <h1>Missions</h1>
+                        <ul id="mission-list"></ul>
+
+                        <div id="mission-card" class="hide">
+                        <button id="back-to-mission-list">go back</button>
+                        <p class="mission-objective">objective</p>
+                        <p class="mission-location">location</p>
+                        <!-- <button id="go-to-button">go to room</button> -->
+                        <!-- <p id="room-message"></p> -->
+                    </div>
+                    </div>
             </div>
-            <div class="right-sidebar">this is the right sidebar</div>
-            <div class="bottom-bar">this is the mysterious bottom bar</div>
+            <div class="right-sidebar">
+                <!-- now i want to kill myself -->
+
+                <div class="command-line">
+                    <div class="instructions">
+                        <p>command console. type "help" to see possible commands</p>
+                    </div>
+
+                    <ul class="command-list">
+                        <li>greet crew</li>
+                        <li>check vitals</li>
+                        <li>random mission</li>
+                        <li>roam ship</li>
+                        <li>throw party</li>
+                    </ul>
+
+                    <div class="console">
+                        messages will be printed here
+                    </div>
+                    <input type="text" name="command-line" id="command-line" placeholder="enter command">
+                </div>
+            </div>
+            <div class="bottom-bar">
+                <div class="event-log">
+                    <p id="event-log-message"></p>
+                </div>
+
+                <div class="piano-corner">
+                    <h5>doc's piano corner</h5>
+                    <button id="piano-btn">play</button>
+                </div>
+            </div>
         </div>
     </main>
     <script type="module" src="./app.js"></script>

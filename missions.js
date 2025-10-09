@@ -1,11 +1,11 @@
 export default {
     supplies: {
-  objective: 'Retrieve supplies and fuel from Planet Base.',
-  location: 'Planet Base',
-  outcome: function(ship) {
-    ship.technical_stats.fuel_level = 100;
-    ship.inventory.find(item => item.item === 'space rum').amount += 15;
-    console.log('Fuel tank full, and booze stash replenished!');
+    objective: 'Retrieve supplies and fuel from Planet Base.',
+    location: 'Planet Base',
+    outcome: function(ship) {
+      ship.technical_stats.fuel_level = 100;
+      ship.inventory.find(item => item.item === 'space rum').amount += 15;
+      console.log('Fuel tank full, and booze stash replenished!');
   }
 },
 

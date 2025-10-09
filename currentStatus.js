@@ -15,6 +15,10 @@ const currentStatusOptions = [
   "Stealthily avoiding encounter with the Cosmic Cops",
   "All good, for once",
   "Caught in a Space Storm",
+  "Warp mode: active",
+  "Cruise mode: active",
+  "Combat mode: active",
+  "Stealth mode: active",
 ];
 
 const currentStatusSpan = document.querySelector('.current-status span');

@@ -1,3 +1,4 @@
+import missions from "./missions.js";
 import { starship } from "./starship.js"; 
 // populate center panel
   // generic
@@ -165,3 +166,61 @@ document.getElementById('back-to-room-list').addEventListener('click', () => {
     document.getElementById('room-message').textContent = ''; 
 })
  
+// locations 
+function populateLocationList() {
+    starship.locations.forEach(location => createLocationElement(location))
+}
+function createLocationElement(location) {
+    const li = document.createElement('li');
+    document.getElementById('location-list').appendChild(li);
+    const div = document.createElement('div');
+    li.appendChild(div);
+    const name = document.createElement('p');
+    name.textContent = location.name;
+    div.appendChild(name);
+    const desc = document.createElement('p');
+    desc.textContent = location.description;
+    div.appendChild(desc);
+}
+
+populateLocationList();
+
+// missions
+
+
+function createMissionButton(id) {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    button.textContent = id + ' >';
+    button.setAttribute('id', id.toLowerCase().replaceAll(' ', ''));
+    button.addEventListener('click', () => showMissionCard(id));
+    li.appendChild(button);
+    document.querySelector('#mission-list').appendChild(li);
+}
+
+function populateMissionList() {
+    Object.keys(starship.missions).forEach(mission => createMissionButton(mission));
+}
+
+populateMissionList();
+
+function showMissionCard(id) {
+    document.getElementById('mission-list').classList.add('hide');
+    document.getElementById('mission-card').classList.remove('hide');
+    populateMissionCard(id);
+}  
+
+function populateMissionCard(id) {
+    document.querySelector('.mission-objective').textContent = `objective: ${starship.missions[id].objective}`;
+    document.querySelector('.mission-location').textContent = `location: ${starship.missions[id].location}`;
+
+    // document.getElementById('go-to-button').addEventListener('click', () => {
+    //     document.getElementById('room-message').textContent = starship.ship_rooms.find(room => room.name === id).goTo();
+    // }) 
+}
+ 
+document.getElementById('back-to-mission-list').addEventListener('click', () => {
+    document.getElementById('mission-list').classList.remove('hide');
+    document.getElementById('mission-card').classList.add('hide');
+    // document.getElementById('mission-message').textContent = ''; 
+})
