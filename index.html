@@ -92,12 +92,22 @@
 
                  <!-- rooms -->
                   <div class="center-panel-content" id="rooms-info">
-                    rooms info
+                    <h1>Rooms</h1>
+                    <ul id="room-list"></ul>
+
+                    <div id="room-card" class="hide">
+                        <button id="back-to-room-list">go back</button>
+                        <p class="room-name">name</p>
+                        <p class="room-description">description</p>
+                        <button id="go-to-button">go to room</button>
+                        <p id="room-message"></p>
+                    </div>
                   </div>
 
                   <!-- cargo -->
                   <div class="center-panel-content" id="cargo-info">
-                    cargo info
+                    <h1>Cargo</h1>
+                    <ul id="cargo-list"></ul>
                   </div>
 
             </div>
@@ -106,6 +116,5 @@
         </div>
     </main>
     <script type="module" src="./app.js"></script>
-    <script src="./menu.js"></script>
 </body>
 </html>
