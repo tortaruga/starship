@@ -86,6 +86,40 @@ ul {
   text-align: left;
 }
 
+.bar-visualizer {
+  background-color: aquamarine;
+  width: 300px;
+  display: flex;
+  gap: 0.25rem;
+  height: 50px;
+}
+
+.bar {
+  width: 30px;
+  height: 100%;
+  background-color: black;
+  display: inline-block;
+}
+
+.bar.complete {
+  background-color: blueviolet;
+}
+
+.level-visualizer {
+  width: 300px;
+  height: 10px;
+  background-color: aquamarine;
+  position: relative;
+}
+
+.inner-level {
+  background-color: black;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 @media screen and (min-width: 600px) {
   .left-sidebar {
     display: inline-block;
