@@ -5,7 +5,7 @@ export default {
     outcome: function(ship) {
       ship.technical_stats.fuel_level = 100;
       ship.inventory.find(item => item.item === 'space rum').amount += 15;
-      console.log('Fuel tank full, and booze stash replenished!');
+      return '<p>Fuel tank full, and booze stash replenished!<p>';
   }
 },
 
@@ -15,6 +15,7 @@ explore: {
   outcome: function(ship) {
     const isSuccessful = Math.random() >= 0.5;
     const spacePolice = Math.random() >= 0.5;
+    let result = '';
 
     if (isSuccessful) {
       const randomGold = Math.ceil(Math.random() * (300 - 50) + 50);
@@ -22,8 +23,7 @@ explore: {
       ship.inventory.find(item => item.item === 'credits').amount += randomGold;
       ship.inventory.find(item => item.item === 'artifact').amount += 1;
       ship.technical_stats.fuel_level -= randomFuel;
-      
-      console.log('Well, done, gang, we got some gold and a new artifact!')
+      result += '<p>Well done, gang, we got some gold and a new artifact!</p>';
     } else {
       const randomGold = Math.ceil(Math.random() * (250 - 30) + 30);
       const randomFuel = Math.ceil(Math.random() * (50 - 20) + 20);
@@ -34,8 +34,7 @@ explore: {
       ship.inventory.find(item => item.item === 'credits').amount += randomGold;
       ship.technical_stats.crew_morale -= moraleDrop;
       ship.technical_stats.shield_strength -= shieldDamage;
-
-      console.log("The mission was a disaster... Some other space criminals stole our gold!")
+      result += `<p>The mission was a disaster... Some other space criminals stole our gold!</p>`
     }
 
     if (spacePolice) {
@@ -45,9 +44,9 @@ explore: {
       ship.technical_stats.crew_morale -= moraleDrop;
       ship.technical_stats.hull_integrity -= hullDamage; 
 
-      console.log('Oh no! We stumbled upon the Space Police!')
+      result += '<p>Oh no! We stumbled upon the Space Police!<p>';
     }
-
+    return result;
   }
 },
 
@@ -55,27 +54,29 @@ sketchy_deals: {
   objective: "Buy and sell stolen goods on black markets or shady space stations.",
   location: 'Crater Town',
   outcome: function(ship) {
+    let result = '';
     const asteroidBelt = Math.random() >= 0.5;
     if (asteroidBelt) {
       const hullDamage = ship.technical_stats.shield_strength >= 50 ? Math.ceil(Math.random() * (10 - 5) + 5) : Math.ceil(Math.random() * (15 - 10) + 10);
 
       ship.technical_stats.hull_integrity -= hullDamage;
-      console.log("Ouch! We suffered some damage in the Asteroid Belt!");
+      result += '<p>Ouch! We suffered some damage in the Asteroid Belt!</p>';
     }
 
     if (ship.inventory.find(item => item.item === 'artifact').amount >= 1) {
       ship.inventory.find(item => item.item === 'artifact').amount -= 1;
       ship.inventory.find(item => item.item === 'credits').amount += Math.ceil(Math.random() * (200 - 50) + 50);
-      console.log("Nice deal! We got some gold in exchange for a worthless artifact!");
+      result += '<p>Nice deal! We got some gold in exchange for a worthless artifact!</p>'
 
     } else if (ship.inventory.find(item => item.item === 'credits').amount >= 200) {
       ship.inventory.find(item => item.item === 'credits').amount -= Math.ceil(Math.random() * (200 - 50) + 50);
       ship.inventory.find(item => item.item === 'artifact').amount += 1;
-      console.log("Nice deal! We bought an interesting artifact!");
+      result += "<p>Nice deal! We bought an interesting artifact!</p>"
     }
 
     const randomFuel = Math.ceil(Math.random() * (50 - 20) + 20);
     ship.technical_stats.fuel_level -= randomFuel;  
+    return result;
   }
 }, 
 
@@ -93,7 +94,7 @@ repair_ship: {
 
         if (ship.technical_stats.hull_integrity > 100) {ship.technical_stats.hull_integrity = 100};
         if (ship.technical_stats.shield_strength > 100) {ship.technical_stats.shield_strength = 100};
-        console.log("Awesome! The Clunkerfly is in optimal shape! ... I mean, compared to its usual standards...");
+        return "<p>Awesome! The Clunkerfly is in optimal shape! ... I mean, compared to its usual standards...</p>"
     } 
 }
 }

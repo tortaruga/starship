@@ -167,48 +167,46 @@ export const starship = {
     locations: Object.entries(locationsData).map(item => new Location(item[1])),
 
     greetCrew: function() {
-        this.crew.forEach(member => console.log(member.catchphrase));
+        let result = '';
+        this.crew.forEach(member => result += `<p>${member.catchphrase}</p>`);
+        return result;
     },
 
     checkStats: function() {
-        console.log(`fuel level: ${this.technical_stats.fuel_level}% – hull integrity: ${this.technical_stats.hull_integrity}% – shield strength: ${this.technical_stats.shield_strength}%`)
+        let result = `fuel level: ${this.technical_stats.fuel_level}% – hull integrity: ${this.technical_stats.hull_integrity}% – shield strength: ${this.technical_stats.shield_strength}%`;
+        return result;
     },
 
     throwParty: function() {
         const boozeUsed = Math.ceil(Math.random() * (4 - 1) + 1);
 
         if (this.technical_stats.hull_integrity < 15) {
-            console.log('Ship too broken to party. The speakers short-circuited and started playing whale mating calls…');
-            return;
+            return {result: '<p>Ship too broken to party. The speakers short-circuited and started playing whale mating calls…</p>', wasSuccessful: false};
         }
         
         if (this.technical_stats.crew_morale >= 85) {
-            console.log("Morale is already sky-high. No need for another party!")
+            return {result: '<p>Morale is already sky-high. No need for another party!</p>', wasSuccessful: false};
         } else {
             if (boozeUsed > this.inventory.find(item => item.item === 'space rum').amount) {
-                console.log("Not enough booze to party... Morale drops even lower");
                 this.technical_stats.crew_morale -= Math.ceil(Math.random() * (20 - 10) + 10);
                 if (this.technical_stats.crew_morale < 0) {
                     this.technical_stats.crew_morale = 0;
                 }
+                return  {result: '<p>Not enough booze to party... Morale drops even lower</p>', wasSuccessful: false};
             } else {
                 this.technical_stats.crew_morale += Math.ceil(Math.random() * (30 - 15) + 15);
                 this.inventory.find(item => item.item === 'space rum').amount -= boozeUsed;
-                console.log(this.inventory.find(item => item.item === 'space rum').amount);
-
+                
                 if (this.technical_stats.crew_morale > 100) {
                     this.technical_stats.crew_morale = 100;
                 }
-                console.log('Whoo! hey DJ, turn that music up!');
-                console.log(this.crew[Math.floor(Math.random() * this.crew.length)].drunken_message)
+                let result = '';
+                result += '<p>Whoo! hey DJ, turn that music up!</p>';
+                result += this.crew[Math.floor(Math.random() * this.crew.length)].drunken_message;
                 
-                setTimeout(() => {
-                    console.log('🎉 The crew throws a wild party! Morale is up!');
-                }, 1000);
+                return {result: result, wasSuccessful: true};
             }
-
         } 
-        return this.technical_stats.crew_morale;
     },
 
     checkBooze: function() {

@@ -130,6 +130,26 @@ ul {
     left: 0;
 }
 
+// coommand line
+.command-line {
+    min-height: 200px;   
+    display: flex;
+    height: calc(100% - 1rem);
+    flex-direction: column;
+    word-wrap: break-word;
+    justify-content: space-between; 
+
+    .console {
+        overflow: auto; 
+        padding: .5rem;
+        max-height: 500px; 
+    }
+ 
+    #command-line {  
+        margin-top: auto;  
+    }
+}
+
 @media screen and (min-width: 600px) {
     .left-sidebar {
         display: inline-block;
