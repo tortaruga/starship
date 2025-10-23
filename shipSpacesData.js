@@ -38,7 +38,7 @@ export default {
     kitchen: {
         name: 'Kitchen',
         description: 'Where Carrot works culinary miracles with questionable ingredients.',
-        action: 'Wanna taste that toxic-looking slop?',
+        action: 'Wanna taste that toxic-looking slob?',
     },
 
     lounge: {

@@ -1,0 +1,85 @@
+@import '_colors.scss';
+
+
+// ship system
+
+#ship-systems-info {
+    padding: .5rem;
+}
+
+.stats-fuel, 
+.stats-shields,
+.stats-hull,
+.stats-ammo,
+.stats-morale { 
+    display: flex; 
+    align-items: center;
+    gap: 1rem; 
+    margin-bottom: .75rem; 
+}
+
+.stats-speed span {
+    color: $neon-pink; 
+}
+
+.good {
+    color: $neon-green; 
+}
+
+.cautions {
+    color: $yellow;
+}
+
+.critical {
+    color: $orange; 
+}
+
+.glitch {
+    color: $neon-pink;
+}
+
+.bar-visualizer {
+    width: 100px; 
+    display: flex;
+    gap: .25rem;
+    height: 25px;  
+}
+
+.bar {  
+    --fill: 0;
+    width: 10px;    
+    height: 100%; 
+    background-color: $medium;   
+    display: inline-block; 
+    background: linear-gradient(to right, $neon-green var(--fill), $medium var(--fill));
+    transition: .8s; 
+} 
+
+.bar.complete {
+    background-color: $neon-green;    
+    box-shadow: 0 0 5px;
+} 
+
+.level-visualizer {
+    width: 150px;
+    height: 10px;
+    background-color: $medium; 
+    position: relative;
+}
+
+.inner-level {
+    background-color: $purple;  
+    height: 100%;  
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 5px $purple; 
+    transition: .8s; 
+}
+
+
+@media screen and (min-width: 600px) {
+    #ship-systems-info {
+    padding: 1.5rem; 
+  }
+}

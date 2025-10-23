@@ -2,94 +2,8 @@ import crewData from "./crewData.js";
 import shipSpacesData from "./shipSpacesData.js";
 import locationsData from "./locationsData.js";
 import missions from "./missions.js";
-
-const engineStates = [
-    {
-        state: "surprisingly good",
-        severity: 'good',
-    },
-
-    {
-        state: "smoother than expected",
-        severity: 'good',
-    },
-
-    {
-        state: "stable",
-        severity: 'good',
-    },
-
-    {
-        state: "unreasonably efficient",
-        severity: 'good',
-    },
-
-    {
-        state: "not bad all things considered",
-        severity: 'caution',
-    },
-    
-    {
-        state: "holding together with duct tape and hope",
-        severity: 'caution',
-    },
-
-    {
-        state: "grumpy but functional",
-        severity: 'caution',
-    },
-
-    {
-        state: "could be worse, probably will be",
-        severity: 'caution',
-    },
-
-    {
-        state: "just about to explode",
-        severity: 'critical',
-    },
-
-    {
-        state: "screaming in binary",
-        severity: 'critical',
-    },
-
-    {
-        state: "just about to explode",
-        severity: 'critical',
-    },
-
-    {
-        state: "brace for impact...",
-        severity: 'critical',
-    },
-
-    {
-        state: "overheated, currently frying bacon on it",
-        severity: 'critical',
-    },
-
-    {
-        state: "stuck in existential crisis",
-        severity: 'glitch',
-    },
-
-     {
-        state: "unknown protocol: 42-ERROR-OMEGA",
-        severity: 'glitch',
-    },
-
-     {
-        state: "Schrödinger’s thrust",
-        severity: 'glitch',
-    },
-
-     {
-        state: "[REDACTED]",
-        severity: 'glitch',
-    },
-];
-
+import { logMessage } from "./functions.js";
+import { engineStates } from "./engineStates.js";
 
 // classes
 class ShipRoom {
@@ -126,10 +40,11 @@ class CrewMember {
 };
 
 class Item {
-    constructor(item, description, amount) {
+    constructor(item, description, amount, tag) {
         this.item = item;
         this.description = description;
         this.amount = amount;
+        this.tag = tag;
     }
 }
 
@@ -155,12 +70,12 @@ export const starship = {
         new CrewMember(crewData.carrot),
     ],
     inventory: [
-        new Item('torchlight', 'Useful when all the lights on the ship suddenly go out – it happens a lot', '-'),
-        new Item('dry biscuits', 'They have been here forever, I wouldn\t recommend eating them', '-'),
-        new Item('teddy bear', 'Missing an eye and half an ear, looking smart with its little bowtie', '-'),
+        new Item('torchlight', 'Useful when all the lights on the ship suddenly go out – it happens a lot', null),
+        new Item('dry biscuits', 'They have been here forever, I wouldn\t recommend eating them', null, 'edible?'),
+        new Item('teddy bear', 'Missing an eye and half an ear, looking smart with its little bowtie', null, 'possibly cursed'),
         new Item('space rum', 'A questionable liquor of very low quality', 13),
         new Item('credits', 'Useful to buy stuff', 1200),
-        new Item('artifact', 'Mysterious object stole-I mean, found, on some space mission', 1),
+        new Item('artifact', 'Mysterious object stole-I mean, found, on some space mission', 1, 'mysterious'),
     ],
 
     ship_rooms: Object.entries(shipSpacesData).map(item => new ShipRoom(item[1])),
@@ -211,7 +126,7 @@ export const starship = {
 
     checkBooze: function() {
         if (this.inventory.find(item => item.item === 'space rum').amount === 0) {
-            console.log("Hey, space rats! We're out of booze! We need to stop by Planet Base before Doc starts hallucinating.")
+            logMessage("Hey, space rats! We're out of booze! We need to stop by Planet Base before Doc starts hallucinating.")
         }
     },
 
@@ -219,25 +134,32 @@ export const starship = {
 
     checkFuel: function() {
         if (this.technical_stats.fuel_level <= 0) {
-            console.log("Folks, we’re out of fuel again.")
+            logMessage("Folks, we’re out of fuel again.")
         }
     },
 
     checkDamage: function() {
         if (this.technical_stats.hull_integrity <= 0 || this.technical_stats.shield_strength <= 0) {
-            console.log("Too much damage, the ship is in critical condition")
+            logMessage('Too much damage, the ship is in critical condition');
         }
     },
 
     checkMorale: function() {
         if (this.technical_stats.crew_morale <= 0) {
-            console.log("Morale is so low the crew is basically depressed. Let's liven up the place")
+            logMessage('Morale is so low the crew is basically depressed. Let\'s liven up the place')
+        }
+    },
+
+    checkAmmo: function() {
+        if (this.technical_stats.ammo_levels <= 0) {
+            logMessage('Bad news, crew, we\'re out of ammo!');
         }
     },
     
     calculateSpeed: function() {
        const maxSpeed = 120000;
-       this.technical_stats.speed_mph = maxSpeed * (this.technical_stats.hull_integrity / 100) * (this.technical_stats.fuel_level / 100); 
+       const speed = maxSpeed * (this.technical_stats.hull_integrity / 100) * (this.technical_stats.fuel_level / 100);
+       this.technical_stats.speed_mph = speed.toFixed(0);
     },
 
     setEngineState: function() {
@@ -252,3 +174,4 @@ export const starship = {
 }
 
 starship.init();
+

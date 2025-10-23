@@ -1,12 +1,12 @@
-import missions from "./missions.js";
+import { updateStats } from "./functions.js";
 import { starship } from "./starship.js"; 
-// populate center panel
+// populate center panel 
   // generic
 
 function populateGenericInfoPanel() {
-    document.getElementById('starship-name').textContent = `name: ${starship.name}`;
-    document.getElementById('starship-model').textContent = `model: ${starship.model}`;
-    document.getElementById('starship-description').textContent = `${starship.description}`;
+    document.getElementById('starship-name').innerHTML = `name: <span>${starship.name}</span>`;
+    document.getElementById('starship-model').innerHTML = `model: <span>${starship.model}</span>`;
+    document.getElementById('starship-description').innerHTML = `${starship.description}`;
 }
 
 populateGenericInfoPanel();
@@ -36,9 +36,9 @@ function showMemberCard(id) {
 }  
 
 function populateMemberCard(id) {
-    document.querySelector('.member-name').textContent = `name: ${starship.crew.find(member => member.name === id).name}`;
-    document.querySelector('.member-role').textContent = `role: ${starship.crew.find(member => member.name === id).role}`;
-    document.querySelector('.member-description').textContent = `${starship.crew.find(member => member.name === id).description}`;
+    document.querySelector('.member-name').innerHTML = `name: <span>${starship.crew.find(member => member.name === id).name}</span>`;
+    document.querySelector('.member-role').innerHTML = `role: <span>${starship.crew.find(member => member.name === id).role}</span>`;
+    document.querySelector('.member-description').innerHTML = `${starship.crew.find(member => member.name === id).description}`;
 
     document.getElementById('talk-button').addEventListener('click', () => {
         document.getElementById('member-message').textContent = starship.crew.find(member => member.name === id).talk();
@@ -54,47 +54,11 @@ document.getElementById('back-to-crew-list').addEventListener('click', () => {
 
 // ship systems
 
-starship.calculateSpeed();
+updateStats(starship); 
 
-function populateStats() {
-    document.querySelector('.stats-speed').textContent = 'speed: ' + starship.technical_stats.speed_mph + ' mph';
-    document.querySelector('.stats-engine').textContent = 'engine state: ' + starship.technical_stats.engine_state;
-}
-
-populateStats();
-
-// visulizers
-function createBarVisualizer(value, element) {
-    const completeBars = Math.trunc(value / 10);
-    const incompleteBars = value % 10;
-
-    for (let i = 0; i < 10; i++) {
-        const span = document.createElement('span');
-        span.classList.add('bar');
-
-        if (i < completeBars) {
-            span.classList.add('complete');
-        }
-
-        if ( i === completeBars) {
-            span.style.background = `linear-gradient(to right, blueviolet ${incompleteBars * 10}%, black ${incompleteBars * 10}%)`;
-        }
-         
-        element.appendChild(span);
-    }
-}
-
- 
-function createLevelVisualizer(value, element) {
-    document.querySelector(`.${element} .inner-level`).style.width = `${value}%`;
-}
-
-createBarVisualizer(starship.technical_stats.fuel_level, document.querySelector('.fuel-visualizer'));
-createBarVisualizer(starship.technical_stats.shield_strength, document.querySelector('.shields-visualizer'));
-createBarVisualizer(starship.technical_stats.hull_integrity, document.querySelector('.hull-visualizer'));
-
-createLevelVisualizer(starship.technical_stats.crew_morale, 'morale-visualizer');
-createLevelVisualizer(starship.technical_stats.ammo_levels, 'ammo-visualizer');  
+// document.querySelectorAll('[data-label="ship-systems"]').forEach(btn => {
+//     btn.addEventListener('click', () => updateStats(starship));
+// });
 
 // cargo
 // li > div.cargo-item-container > p.cargo-item, p.cargo-item-desc
@@ -109,23 +73,39 @@ function createCargoItem(item) {
     const div = document.createElement('div');
     div.classList.add('cargo-item-container');
     li.appendChild(div); 
-    const itemP = document.createElement('p');
 
-    let text;
-    if (item.amount === '-') {
-        text = `${item.item}`;
-    } else {
-        text = `${item.item} - <span>${item.amount}</span>`
+    const itemName = document.createElement('p');
+    itemName.classList.add('item-name');
+    
+    itemName.innerHTML = `${item.item}`; 
+    div.appendChild(itemName);
+
+    if (item.amount) {
+        const amount = document.createElement('p');
+        amount.classList.add('item-amount');
+        amount.setAttribute('id', item.item);
+        amount.innerHTML = `amount: <span>${item.amount}</span>`;
+        div.appendChild(amount);
+    } 
+
+    if (item.tag) {
+        const tag = document.createElement('span');
+        tag.classList.add('item-tag');
+        tag.textContent = item.tag;
+        itemName.appendChild(tag); 
     }
-
-    itemP.innerHTML = text; 
-    div.appendChild(itemP);
+ 
     const descP = document.createElement('p');
     descP.textContent = item.description;
+    descP.classList.add('item-desc')
     div.appendChild(descP);
 }
 
 populateCargoList();
+
+export function updateItemAmount(item, ship) {
+    document.getElementById(`${item.item}`).textContent = ship.inventory.find(el => el.item === item.item).amount;
+}
 
 // rooms
 
@@ -152,7 +132,7 @@ function showRoomCard(id) {
 }  
 
 function populateRoomCard(id) {
-    document.querySelector('.room-name').textContent = `name: ${starship.ship_rooms.find(room => room.name === id).name}`;
+    document.querySelector('.room-name').innerHTML = `name: <span>${starship.ship_rooms.find(room => room.name === id).name}</span>`;
     document.querySelector('.room-description').textContent = `${starship.ship_rooms.find(room => room.name === id).description}`;
 
     document.getElementById('go-to-button').addEventListener('click', () => {
@@ -177,9 +157,11 @@ function createLocationElement(location) {
     li.appendChild(div);
     const name = document.createElement('p');
     name.textContent = location.name;
+    name.classList.add('location-name');
     div.appendChild(name);
     const desc = document.createElement('p');
     desc.textContent = location.description;
+    desc.classList.add('location-desc');
     div.appendChild(desc);
 }
 
@@ -210,17 +192,23 @@ function showMissionCard(id) {
     populateMissionCard(id);
 }  
 
+const goMissionBtn = document.querySelector('#go-mission-button');
 function populateMissionCard(id) {
-    document.querySelector('.mission-objective').textContent = `objective: ${starship.missions[id].objective}`;
-    document.querySelector('.mission-location').textContent = `location: ${starship.missions[id].location}`;
-
-    // document.getElementById('go-to-button').addEventListener('click', () => {
-    //     document.getElementById('room-message').textContent = starship.ship_rooms.find(room => room.name === id).goTo();
-    // }) 
+    document.querySelector('.mission-objective').innerHTML = `objective: <span>${starship.missions[id].objective}</span>`;
+    document.querySelector('.mission-location').innerHTML = `location: <span>${starship.missions[id].location}</span>`;
+ 
+    goMissionBtn.onclick = () => {
+        document.getElementById('mission-message').innerHTML = 'check console for mission report.';
+        const wrapper = document.createElement('div');
+        const consoleScreen = document.querySelector('.console');
+        wrapper.innerHTML = starship.missions[id].outcome(starship);
+        consoleScreen.appendChild(wrapper);
+        consoleScreen.scrollTop = consoleScreen.scrollHeight;
+    }
 }
  
 document.getElementById('back-to-mission-list').addEventListener('click', () => {
     document.getElementById('mission-list').classList.remove('hide');
     document.getElementById('mission-card').classList.add('hide');
-    // document.getElementById('mission-message').textContent = ''; 
+    document.getElementById('mission-message').textContent = ''; 
 })

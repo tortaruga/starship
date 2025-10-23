@@ -1,0 +1,31 @@
+ @import '_colors.scss';
+
+#locations-info {
+    padding: .5rem;
+}
+
+#location-list li {
+    background-color: rgba($color: $medium, $alpha: .6);
+    border-radius: .3rem;
+    padding: .75rem; 
+    margin-bottom: .75rem;   
+} 
+
+.location-name {
+    color: $yellow;
+    display: flex;
+    align-items: center;
+    gap: .75rem; 
+    justify-content: space-between; 
+    font-size: 1.2rem; 
+}
+
+.location-desc {
+    font-size: .95rem; 
+}
+
+@media screen and (min-width: 600px) {
+    #locations-info {
+        padding: 1.5rem; 
+    }
+} 

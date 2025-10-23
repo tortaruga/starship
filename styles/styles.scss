@@ -1,10 +1,40 @@
+@import '_colors.scss';
+@import '_top-bar.scss';
+@import '_generics.scss';
+@import '_crew.scss';
+@import '_systems.scss';
+@import '_cargo.scss';
+@import '_rooms.scss';
+@import '_colors.scss';
+@import '_locations.scss';
+@import '_missions.scss';
+@import '_bottom-bar.scss';
+
+
+$dark: #002439; 
+$neon-cyan: #85ffe2;
+$purple: #826ced;
+$neon-pink: #ff54a6;
+$neon-green: #81ec86;  
+$medium: #040823;
+$orange: #ff7f4c; 
+
 * {
     box-sizing: border-box;
+    font-family: 'Courier New', Courier, mon ospace; 
+    color: $neon-cyan;
 }
+
+body.loading {
+  visibility: hidden;
+} 
 
 body {
     margin: 0;
+    background-color: $dark;
     padding: 1rem; 
+    text-shadow: 0 0 5px; 
+    font-size: .95rem;  
 }
 
 button {
@@ -19,7 +49,7 @@ ul {
 }
 
 .container {
-    background-color: aqua;
+    background-color: $medium; 
     padding: 1rem;  
     border-radius: .5rem;
     display: grid;
@@ -32,10 +62,10 @@ ul {
 .bottom-bar,
 .center-panel,
 .collapsible-nav { 
-    background-color: violet;  
+    background-color: $dark;  
     padding: .5rem;
     border-radius: .5rem; 
-    overflow: auto; 
+    overflow: auto;   
 }
 
 .left-sidebar {
@@ -46,88 +76,40 @@ ul {
     display: none; // toggle on click
 }
 
-// topbar 
-.top-bar {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-}  
-
-.current-status { 
-    padding: .5rem; 
-    letter-spacing: .06rem; 
-    width: 30%; 
-    overflow: hidden; 
-    
-    span {
-        white-space: nowrap;   
-        display: inline-block;   
-        transform: translateX(120%);    
-        animation: marquee 10s steps(20) both infinite; // to be dynamically determined 
-    }
-}
-
-@keyframes marquee {
-    to {
-        transform: translateX(-120%); 
-    }
-}
-
 // navbar
-.left-sidebar {
-    ul { 
+.left-sidebar,
+.collapsible-nav {  
+    ul {  
         display: flex;
         flex-direction: column;
-        gap: .5rem; 
+        gap: .75rem;  
 
         li {
             border-radius: .25rem;
-            background-color: bisque;  
+            background-color: $neon-green;  
+            color: $medium;       
+            padding: .25rem; 
+            box-shadow: 0 0 5px $neon-green;
+            transition: .3s;  
+
+            &:hover {
+                background-color: $neon-cyan; 
+                transform: scale(.99);           
+            }
+            
+
             button {
                 border: none;
                 background-color: transparent; 
                 width: 100%; 
                 text-align: left; 
+                color: inherit;
+                font-weight: bold;
+                text-transform: uppercase;   
+                
             }
         }
     }
-}
-
-
-// ship system
-.bar-visualizer {
-    background-color: aquamarine;
-    width: 300px;
-    display: flex;
-    gap: .25rem;
-    height: 50px;
-
-}
-
-.bar { 
-    width: 30px; 
-    height: 100%; 
-    background-color: black;  
-    display: inline-block; 
-} 
-
-.bar.complete {
-    background-color: blueviolet;  
-} 
-
-.level-visualizer {
-    width: 300px;
-    height: 10px;
-    background-color: aquamarine;
-    position: relative;
-}
-
-.inner-level {
-    background-color: black;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 // coommand line
@@ -143,14 +125,36 @@ ul {
         overflow: auto; 
         padding: .5rem;
         max-height: 500px; 
+        scroll-behavior: smooth;
     }
  
     #command-line {  
         margin-top: auto;  
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $neon-cyan;
     }
+
+} 
+
+input:focus {
+    outline: none;
 }
 
+body.keyboard-navigation input:focus {
+    outline: 2px solid $neon-cyan;  
+  }
+
+
 @media screen and (min-width: 600px) {
+    body {
+        font-size: 1.1rem;  
+    }
+
+    button {
+        font-size: inherit; 
+    }
+
     .left-sidebar {
         display: inline-block;
     } 
@@ -162,7 +166,7 @@ ul {
     .container {
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(12, 1fr); 
-        height: 700px;    
+        height: 800px;    
         max-width: 1500px;  
         margin-inline: auto;  
     }

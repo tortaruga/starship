@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
-<body>
+<body class="loading">
     <main>
         <div class="container"> 
             <!-- topbar -->
@@ -43,7 +43,7 @@
                 </ul>
             </div>
 
-            <!-- center panel (here we go... react would have been nice here, eh?) -->
+            <!-- center panel -->
             <div class="center-panel">
                 <!-- generic -->
                  <div class="center-panel-content" id="generic-info">
@@ -58,7 +58,7 @@
                     <ul id="crew-list"></ul>
 
                     <div id="member-card" class="hide">
-                        <button id="back-to-crew-list">go back</button>
+                        <button id="back-to-crew-list">< go back</button>
                         <p class="member-name">name</p>
                         <p class="member-role">role</p>
                         <p class="member-description">description</p>
@@ -137,13 +137,12 @@
                         <button id="back-to-mission-list">go back</button>
                         <p class="mission-objective">objective</p>
                         <p class="mission-location">location</p>
-                        <!-- <button id="go-to-button">go to room</button> -->
-                        <!-- <p id="room-message"></p> -->
+                        <button id="go-mission-button">go on mission</button>
+                        <p id="mission-message"></p>
                     </div>
                     </div>
             </div>
             <div class="right-sidebar">
-                <!-- now i want to kill myself -->
 
                 <div class="command-line">
                     <div class="console"></div>
@@ -162,7 +161,33 @@
 
                 <div class="piano-corner">
                     <h5>doc's piano corner</h5>
-                    <button id="piano-btn">play</button>
+                    <div class="piano">
+                        <span id="c"></span>
+                        <span id="d"></span>
+                        <span id="e"></span>
+                        <span id="f"></span>
+                        <span id="g"></span>
+                        <span id="a"></span>
+                        <span id="b"></span>
+
+                        <span id="d-flat" class="flat"></span>
+                        <span id="e-flat" class="flat"></span>
+                        <span id="g-flat" class="flat"></span>
+                        <span id="a-flat" class="flat"></span>
+                        <span id="b-flat" class="flat"></span>
+                    </div>
+
+                    <div class="select-tune">
+                        <button id="sad" class="active"></button>
+                        <button id="mad"></button>
+                        <button id="virtuoso"></button>
+                        <button id="detuned"></button>
+                        <button id="dramatic"></button>
+                    </div>
+                    <div class="track-title">track: mysterious past</div>
+                    <button id="piano-btn">
+                        <img src="./assets/play.svg" alt="symbol for playing/pausing track">
+                    </button>
                 </div>
             </div>
         </div>

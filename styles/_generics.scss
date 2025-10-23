@@ -1,0 +1,26 @@
+@import '_colors.scss';
+
+#generic-info span {
+    color: $neon-pink;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px; 
+    font-size: 1.3rem; 
+    letter-spacing: .1rem;    
+} 
+
+#starship-description {
+    background-color: rgba($color: $medium, $alpha: .6); 
+    padding: .5rem; 
+    border-radius: .4rem;   
+    color: $neon-green;  
+}
+
+@media screen and (min-width: 600px) {
+    #generic-info {
+        padding: 2rem;
+    } 
+
+    #starship-description {
+        padding: 1.5rem;   
+    }
+}

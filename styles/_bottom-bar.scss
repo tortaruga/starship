@@ -1,0 +1,124 @@
+@import '_colors.scss';
+
+.bottom-bar {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 1rem;
+    justify-content: space-between; 
+}
+
+.event-log,
+.piano-corner {
+    background-color: $medium; 
+}
+ 
+.event-log {
+    width: 60%; 
+    min-width: 300px; 
+}
+
+.piano-corner {
+    flex-grow: 1; 
+
+    h5 { 
+        margin: .5rem;
+        text-align: center;    
+    }
+}
+
+.piano {
+    display: flex;
+    width: 80%;
+    margin-inline: auto; 
+    height: 70px;   
+    position: relative;
+
+    span {
+        width: calc(100% / 7);
+        height: 100%;
+        background-color: $dark; 
+        border: 1px solid grey; 
+    }
+
+    span.flat {
+        position: absolute; 
+        height: 50%;  
+        background-color: $medium; 
+    }
+ 
+    #d-flat {
+        left: 5%; 
+    }
+
+    
+    #e-flat {
+        left: 20%;   
+    }
+
+    
+    #g-flat { 
+        left: 50%;    
+    }
+
+    
+    #a-flat {
+        left: 65%;  
+    }
+
+    
+    #b-flat {
+        left: 80%;   
+    }
+} 
+
+.animate {
+    animation: pianoAnimate 1s;  
+}
+
+@keyframes pianoAnimate {
+    50% {
+        background-color: $neon-cyan;  
+    }
+}
+
+.select-tune {
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    margin-block: .4rem; 
+
+    button {
+        background-color: $dark;
+        border-radius: 50%;
+        aspect-ratio: 1; 
+        width: 2px;  
+        transition: .2s; 
+
+        &:hover {
+            background-color: rgba($color: $neon-cyan, $alpha: .6); 
+            box-shadow: 0 0 5px;
+        }
+    }
+
+    button.active {
+        background-color: $neon-cyan; 
+        box-shadow: 0 0 5px;  
+    }
+}
+
+.track-title {
+    font-size: .9rem;
+    max-width: 400px; 
+    text-align: center;
+    margin: auto; 
+}
+ 
+#piano-btn {
+    width: 1.5rem; 
+    display: block;
+    margin: auto; 
+
+    img {
+        max-width: 100%;  
+    }
+}

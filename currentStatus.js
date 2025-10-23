@@ -30,7 +30,7 @@ function setCurrentStatus() {
 }
 
 setCurrentStatus();
-const statusIntervalTime = 1000 * 60 * 3;
+const statusIntervalTime = 1000 * 60 * 1.5; 
 setInterval(setCurrentStatus, statusIntervalTime);  
 
 function handleStatusAnimationStep(string) {

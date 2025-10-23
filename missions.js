@@ -1,11 +1,18 @@
+import { updateItemAmount } from "./centerPanel.js";
+import { updateStats, createBarVisualizer, handleNegativeLevel } from "./functions.js"; 
+
 export default {
     supplies: {
     objective: 'Retrieve supplies and fuel from Planet Base.',
     location: 'Planet Base',
     outcome: function(ship) {
       ship.technical_stats.fuel_level = 100;
+      ship.technical_stats.ammo_levels = 100;
       ship.inventory.find(item => item.item === 'space rum').amount += 15;
-      return '<p>Fuel tank full, and booze stash replenished!<p>';
+  
+      updateStats(ship);
+      updateItemAmount(ship.inventory.find(item => item.item === 'space rum'), ship);
+      return `<p>Fuel tank full, and booze stash replenished!<p> <p>Fuel level: 100%</p> <p>space rum: +15</p> <p>Ammo: 100%</p>`;
   }
 },
 
@@ -15,37 +22,67 @@ explore: {
   outcome: function(ship) {
     const isSuccessful = Math.random() >= 0.5;
     const spacePolice = Math.random() >= 0.5;
-    let result = '';
+    let result = ``;
 
     if (isSuccessful) {
       const randomGold = Math.ceil(Math.random() * (300 - 50) + 50);
       const randomFuel = Math.ceil(Math.random() * (50 - 20) + 20);
+      const randomAmmo = Math.ceil(Math.random() * (30 - 10) + 10);
       ship.inventory.find(item => item.item === 'credits').amount += randomGold;
       ship.inventory.find(item => item.item === 'artifact').amount += 1;
       ship.technical_stats.fuel_level -= randomFuel;
-      result += '<p>Well done, gang, we got some gold and a new artifact!</p>';
+      ship.technical_stats.ammo_levels -= randomAmmo;
+      handleNegativeLevel(ship.technical_stats.fuel_level);
+      handleNegativeLevel(ship.technical_stats.ammo_levels);
+      result += `<p>Well done, gang, we got some gold and a new artifact!</p> <p>credit: +${randomGold}</p> <p>Fuel level: -${randomFuel}%</p> <p>Artifacts: +1</p> <p>Ammo: -${randomAmmo}%</p>`;
     } else {
       const randomGold = Math.ceil(Math.random() * (250 - 30) + 30);
       const randomFuel = Math.ceil(Math.random() * (50 - 20) + 20);
+      const randomAmmo = Math.ceil(Math.random() * (50 - 15) + 15);
       const shieldDamage = Math.ceil(Math.random() * (20 - 8) + 8);
       const moraleDrop =  Math.ceil(Math.random() * (35 - 15) + 15);
 
       ship.technical_stats.fuel_level -= randomFuel;
+      ship.technical_stats.ammo_levels -= randomAmmo;
       ship.inventory.find(item => item.item === 'credits').amount += randomGold;
       ship.technical_stats.crew_morale -= moraleDrop;
       ship.technical_stats.shield_strength -= shieldDamage;
-      result += `<p>The mission was a disaster... Some other space criminals stole our gold!</p>`
+
+      ship.technical_stats.fuel_level = handleNegativeLevel(ship.technical_stats.fuel_level);
+      ship.technical_stats.ammo_levels = handleNegativeLevel(ship.technical_stats.ammo_levels);
+      ship.technical_stats.crew_morale = handleNegativeLevel(ship.technical_stats.crew_morale);
+      ship.technical_stats.shield_strength = handleNegativeLevel(ship.technical_stats.shield_strength);
+
+      result += `<p>The mission was a disaster... Some other space criminals stole our gold!</p> <p>Credit: -${randomGold}</p> <p>Fuel level: -${randomFuel}%</p> <p>Shield strength: -${shieldDamage}%</p> <p>Crew morale: -${moraleDrop}%</p> <p>Ammo: -${randomAmmo}%</p>`
     }
 
     if (spacePolice) {
       const hullDamage = Math.ceil(Math.random() * (40 - 15) + 15);
       const moraleDrop =  Math.ceil(Math.random() * (40 - 20) + 20);
+      const randomAmmo =  Math.ceil(Math.random() * (20 - 10) + 10);
 
       ship.technical_stats.crew_morale -= moraleDrop;
       ship.technical_stats.hull_integrity -= hullDamage; 
+      ship.technical_stats.ammo_levels -= randomAmmo; 
 
-      result += '<p>Oh no! We stumbled upon the Space Police!<p>';
+      ship.technical_stats.ammo_levels = handleNegativeLevel(ship.technical_stats.ammo_levels);
+      ship.technical_stats.crew_morale = handleNegativeLevel(ship.technical_stats.crew_morale);
+      ship.technical_stats.hull_integrity = handleNegativeLevel(ship.technical_stats.hull_integrity);
+
+      result += `<p>Oh no! We stumbled upon the Space Police!<p> <p>Hull integrity: -${hullDamage}%</p> <p>Crew morale: -${moraleDrop}%</p> <p>Ammo: -${randomAmmo}%</p>`;
     }
+
+    setTimeout(() => {
+      ship.checkMorale();
+      ship.checkFuel();
+      ship.checkDamage();
+      ship.checkAmmo();
+    }, 1000);
+
+    updateItemAmount(ship.inventory.find(item => item.item === 'credits'), ship);
+      updateItemAmount(ship.inventory.find(item => item.item === 'artifact'), ship);
+      updateStats(ship);
+
     return result;
   }
 },
@@ -60,23 +97,37 @@ sketchy_deals: {
       const hullDamage = ship.technical_stats.shield_strength >= 50 ? Math.ceil(Math.random() * (10 - 5) + 5) : Math.ceil(Math.random() * (15 - 10) + 10);
 
       ship.technical_stats.hull_integrity -= hullDamage;
-      result += '<p>Ouch! We suffered some damage in the Asteroid Belt!</p>';
+      ship.technical_stats.hull_integrity = handleNegativeLevel(ship.technical_stats.hull_integrity);
+
+      result += `<p>Ouch! We suffered some damage in the Asteroid Belt!</p> <p>Hull integrity: -${hullDamage}%</p>`;
     }
 
     if (ship.inventory.find(item => item.item === 'artifact').amount >= 1) {
       ship.inventory.find(item => item.item === 'artifact').amount -= 1;
-      ship.inventory.find(item => item.item === 'credits').amount += Math.ceil(Math.random() * (200 - 50) + 50);
-      result += '<p>Nice deal! We got some gold in exchange for a worthless artifact!</p>'
-
+      const randomGold = Math.ceil(Math.random() * (200 - 50) + 50);
+      ship.inventory.find(item => item.item === 'credits').amount += randomGold;
+      result += `<p>Nice deal! We got some gold in exchange for a worthless artifact!</p> <p>Artifacts: -1</p> <p>Credit: +${randomGold}</p>`
     } else if (ship.inventory.find(item => item.item === 'credits').amount >= 200) {
-      ship.inventory.find(item => item.item === 'credits').amount -= Math.ceil(Math.random() * (200 - 50) + 50);
+      const randomGold = Math.ceil(Math.random() * (200 - 50) + 50);
+      ship.inventory.find(item => item.item === 'credits').amount -= randomGold;
       ship.inventory.find(item => item.item === 'artifact').amount += 1;
-      result += "<p>Nice deal! We bought an interesting artifact!</p>"
+      result += `<p>Nice deal! We bought an interesting artifact!</p> <p>Artifacts: +1</p> <p>Credit: -${randomGold}</p>`
     }
 
     const randomFuel = Math.ceil(Math.random() * (50 - 20) + 20);
     ship.technical_stats.fuel_level -= randomFuel;  
-    return result;
+    ship.technical_stats.fuel_level = handleNegativeLevel(ship.technical_stats.fuel_level);
+
+    updateItemAmount(ship.inventory.find(item => item.item === 'credits'), ship);
+    updateItemAmount(ship.inventory.find(item => item.item === 'artifact'), ship);
+
+    setTimeout(() => {
+      ship.checkDamage();
+      ship.checkFuel();
+    }, 1000);
+      updateStats(ship);
+
+    return result + `<p>Fuel level: -${randomFuel}%</p>`;
   }
 }, 
 
@@ -92,9 +143,16 @@ repair_ship: {
         ship.technical_stats.shield_strength += shieldHealth;
         ship.technical_stats.fuel_level -= randomFuel;
 
+        ship.technical_stats.fuel_level = handleNegativeLevel(ship.technical_stats.fuel_level);
+
+        setTimeout(() => ship.checkFuel(), 1000); 
+
         if (ship.technical_stats.hull_integrity > 100) {ship.technical_stats.hull_integrity = 100};
         if (ship.technical_stats.shield_strength > 100) {ship.technical_stats.shield_strength = 100};
-        return "<p>Awesome! The Clunkerfly is in optimal shape! ... I mean, compared to its usual standards...</p>"
+        
+        updateStats(ship);
+
+        return `<p>Awesome! The Clunkerfly is in optimal shape! ... I mean, compared to its usual standards...</p> <p>Hull integrity: +${hullHealth}%</p> <p>Shield strength: +${shieldHealth}%</p> <p>Fuel level: -${randomFuel}%</p>`
     } 
-}
+  }
 }
