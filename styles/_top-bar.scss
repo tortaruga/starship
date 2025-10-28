@@ -26,6 +26,12 @@
     }
 }
 
+#disco-switch {
+    img {
+        width: 1.5rem;   
+    }
+}
+
 @keyframes marquee {
     to {
         transform: translateX(-120%); 

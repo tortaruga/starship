@@ -1,7 +1,21 @@
-import { updateStats } from "./functions.js";
+import { randomColorClass, updateStats } from "./functions.js";
 import { starship } from "./starship.js";
 const commandInput = document.getElementById('command-line');
 const consoleScreen = document.querySelector('.console');
+const maxMessages = 10;
+
+const notificationSound = new Audio('./assets/notification.wav');
+
+export function handleMessages() {
+    while (consoleScreen.children.length >= maxMessages) {
+    consoleScreen.removeChild(consoleScreen.firstChild);
+  }
+  // Scroll to bottom 
+  consoleScreen.scrollTop = consoleScreen.scrollHeight;    
+  console.log('scroll')
+  notificationSound.play();
+ 
+}
 
 commandInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -18,50 +32,44 @@ function handleCommand(command) {
 
     if (normalizedCommand === 'help') {
         help();
-        consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+        handleMessages(); 
         return;
     }
 
     if (normalizedCommand === 'greet crew') {
-        // 
-        consoleScreen.innerHTML += starship.greetCrew();
-        
-        consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+        createWrapper(starship.greetCrew(), consoleScreen);
+        handleMessages(); 
         return;
     }
 
     if (normalizedCommand === 'check vitals') {
-        // 
-        consoleScreen.innerHTML += starship.checkStats();
-        
-        consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+        createWrapper(starship.checkStats(), consoleScreen); 
+        handleMessages();
         return;
     }
 
     if (normalizedCommand === 'roam ship') {
-        // 
         roamShip();
-        
-        consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+        handleMessages();
         return;
     }
 
     if (normalizedCommand === 'random mission') {
         randomMission();
         
-        consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+        handleMessages();
         return;
     }
 
     if (normalizedCommand === 'throw party') {
         throwParty();
         
-        consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+        handleMessages();
         return;
     }
 
     consoleScreen.innerHTML += '<p>Invalid command. Check spelling or type "help"</p>';
-    consoleScreen.scrollTop = consoleScreen.scrollHeight; 
+    handleMessages();
     
 }
 
@@ -78,24 +86,40 @@ function help() {
 
 function roamShip() {
     const randomRoom = starship.ship_rooms[Math.ceil(Math.random() * starship.ship_rooms.length)];
-    consoleScreen.innerHTML += `<p>${randomRoom.goTo()}</p>`;
+    createWrapper(`<p class="${randomColorClass()}">${randomRoom.goTo()}</p>`, consoleScreen);
 }
 
 function randomMission() {
     const missionsArr = Object.keys(starship.missions);
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = starship.missions[missionsArr[Math.floor(Math.random() * missionsArr.length)]].outcome(starship);
-    consoleScreen.appendChild(wrapper);
+    const randomMission = starship.missions[missionsArr[Math.floor(Math.random() * missionsArr.length)]].outcome(starship);
+    createWrapper(randomMission.message, consoleScreen); 
+
+    const coinNotification = new Audio('./assets/coins.wav');
+    const laserGun = new Audio('./assets/laser-gun.wav');
+    const gunFight = new Audio('./assets/gun-fight.wav');
+    if (randomMission.earnedMoney) coinNotification.play();
+    if (randomMission.police) laserGun.play();
+    if (randomMission.fight) gunFight.play();
 }
 
 function throwParty() {
     const party = starship.throwParty();
+
     if (party.wasSuccessful) {
         setTimeout(() => {
-            consoleScreen.innerHTML += '<p>🎉 The crew throws a wild party! Morale is up!</p>';
+            createWrapper(`<p><span class="emoji">🎉</span> The crew throws a wild party! Morale is up!</p> <p class="${randomColorClass()}">Crew morale: ${starship.technical_stats.crew_morale}%</p>`, consoleScreen);
+            handleMessages();
         }, 1000);
     } 
 
     updateStats(starship);
-    consoleScreen.innerHTML += party.result;
+    createWrapper(party.result, consoleScreen);
+}
+
+
+export function createWrapper(content, parent) {
+   const wrapper = document.createElement('div');
+   wrapper.classList.add('wrapper-div');
+   parent.appendChild(wrapper);
+   wrapper.innerHTML = content;
 }

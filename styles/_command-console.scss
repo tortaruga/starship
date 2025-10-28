@@ -1,0 +1,63 @@
+@import '_colors.scss';
+
+// coommand line
+.command-line {
+    min-height: 200px;   
+    display: flex;
+    height: calc(100% - 1rem);
+    flex-direction: column;
+    word-wrap: break-word;
+    justify-content: flex-end;
+    font-size: .9rem; 
+ 
+    .instructions p {  
+        font-size: .9rem;
+        color: $purple;
+    } 
+
+    .instructions p.disco {
+        animation: discoText 7s;
+    }
+
+    .console {
+        overflow: auto; 
+        padding: .5rem;
+        max-height: 500px; 
+        scroll-behavior: smooth;
+        flex-grow: 1; 
+    }
+ 
+    #command-line { 
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $neon-cyan;
+
+        &::placeholder {
+            color: rgba($color: $neon-cyan, $alpha: .6);   
+        }
+    }
+
+} 
+
+input:focus {
+    outline: none;
+}
+
+body.keyboard-navigation input:focus {
+    outline: 2px solid $neon-cyan;  
+}
+
+
+@keyframes discoText {
+    5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
+        color: $neon-green;
+    }
+    
+    0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
+        color: $neon-pink;
+    }
+
+    7%, 17%, 27%, 37%, 47%, 57%, 67%, 77%, 87%, 97% {
+        color: $neon-cyan;
+    }
+}

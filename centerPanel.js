@@ -1,3 +1,4 @@
+import { createWrapper, handleMessages } from "./commandConsole.js";
 import { updateStats } from "./functions.js";
 import { starship } from "./starship.js"; 
 // populate center panel 
@@ -193,17 +194,28 @@ function showMissionCard(id) {
 }  
 
 const goMissionBtn = document.querySelector('#go-mission-button');
+
 function populateMissionCard(id) {
     document.querySelector('.mission-objective').innerHTML = `objective: <span>${starship.missions[id].objective}</span>`;
     document.querySelector('.mission-location').innerHTML = `location: <span>${starship.missions[id].location}</span>`;
  
     goMissionBtn.onclick = () => {
         document.getElementById('mission-message').innerHTML = 'check console for mission report.';
-        const wrapper = document.createElement('div');
         const consoleScreen = document.querySelector('.console');
-        wrapper.innerHTML = starship.missions[id].outcome(starship);
-        consoleScreen.appendChild(wrapper);
-        consoleScreen.scrollTop = consoleScreen.scrollHeight;
+        
+        const result = starship.missions[id].outcome(starship); 
+        createWrapper(result.message, consoleScreen);
+
+        handleMessages();
+        
+        const coinNotification = new Audio('./assets/coins.wav');
+       
+        if (result.earnedMoney) coinNotification.play();
+        const laserGun = new Audio('./assets/laser-gun.wav');
+        const gunFight = new Audio('./assets/gun-fight.wav');
+        if (randomMission.police) laserGun.play();
+        if (randomMission.fight) gunFight.play();
+         
     }
 }
  

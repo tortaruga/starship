@@ -3,6 +3,7 @@ import "./navLogic.js";
 import "./centerPanel.js";
 import './bottomBar.js'; 
 import './commandConsole.js'; 
+import './topBar.js';
 
 function handleFirstTab(e) {
     if (e.key === 'Tab') {

@@ -2,8 +2,10 @@ import crewData from "./crewData.js";
 import shipSpacesData from "./shipSpacesData.js";
 import locationsData from "./locationsData.js";
 import missions from "./missions.js";
-import { logMessage } from "./functions.js";
+import { randomColorClass } from "./functions.js";
 import { engineStates } from "./engineStates.js";
+import { createWrapper } from "./commandConsole.js";
+const consoleScreen = document.querySelector('.console');
 
 // classes
 class ShipRoom {
@@ -82,13 +84,14 @@ export const starship = {
     locations: Object.entries(locationsData).map(item => new Location(item[1])),
 
     greetCrew: function() {
-        let result = '';
-        this.crew.forEach(member => result += `<p>${member.catchphrase}</p>`);
+        let result = 'You greet the crew.';
+        this.crew.forEach(member => result += `<p class=${randomColorClass()}><span class="emoji">👋</span> ${member.name} says: ${member.catchphrase}</p>`);
         return result;
     },
 
     checkStats: function() {
-        let result = `fuel level: ${this.technical_stats.fuel_level}% – hull integrity: ${this.technical_stats.hull_integrity}% – shield strength: ${this.technical_stats.shield_strength}%`;
+        let result = '';
+        Object.entries(this.technical_stats).forEach((entry) => result += `<p class="${randomColorClass()}">- ${entry[0]}: ${entry[1]}</p>`)
         return result;
     },
 
@@ -96,18 +99,18 @@ export const starship = {
         const boozeUsed = Math.ceil(Math.random() * (4 - 1) + 1);
 
         if (this.technical_stats.hull_integrity < 15) {
-            return {result: '<p>Ship too broken to party. The speakers short-circuited and started playing whale mating calls…</p>', wasSuccessful: false};
+            return {result: `<p class="${randomColorClass()}"><span class="emoji">💀</span> Ship too broken to party. The speakers short-circuited and started playing whale mating calls…</p>`, wasSuccessful: false};
         }
         
         if (this.technical_stats.crew_morale >= 85) {
-            return {result: '<p>Morale is already sky-high. No need for another party!</p>', wasSuccessful: false};
+            return {result: `<p class="${randomColorClass()}">Morale is already sky-high. No need for another party!</p>`, wasSuccessful: false};
         } else {
             if (boozeUsed > this.inventory.find(item => item.item === 'space rum').amount) {
                 this.technical_stats.crew_morale -= Math.ceil(Math.random() * (20 - 10) + 10);
                 if (this.technical_stats.crew_morale < 0) {
                     this.technical_stats.crew_morale = 0;
                 }
-                return  {result: '<p>Not enough booze to party... Morale drops even lower</p>', wasSuccessful: false};
+                return  {result: `<p class="${randomColorClass()}">Not enough booze to party... Morale drops even lower <span class="emoji">💔</span></p>`, wasSuccessful: false};
             } else {
                 this.technical_stats.crew_morale += Math.ceil(Math.random() * (30 - 15) + 15);
                 this.inventory.find(item => item.item === 'space rum').amount -= boozeUsed;
@@ -116,8 +119,9 @@ export const starship = {
                     this.technical_stats.crew_morale = 100;
                 }
                 let result = '';
-                result += '<p>Whoo! hey DJ, turn that music up!</p>';
-                result += this.crew[Math.floor(Math.random() * this.crew.length)].drunken_message;
+                const randomMember = this.crew[Math.floor(Math.random() * this.crew.length)];
+                result += `<p class="${randomColorClass()}"><span class="emoji">🤘 </span>Whoo! hey DJ, turn that music up!</p>`;
+                result += `<span class="emoji">🍸</span> Maybe ${randomMember.name} had too many drinks...` + `<p class="${randomColorClass()}">${randomMember.drunken_message}</p>`;
                 
                 return {result: result, wasSuccessful: true};
             }
@@ -126,7 +130,8 @@ export const starship = {
 
     checkBooze: function() {
         if (this.inventory.find(item => item.item === 'space rum').amount === 0) {
-            logMessage("Hey, space rats! We're out of booze! We need to stop by Planet Base before Doc starts hallucinating.")
+            createWrapper(`<p class="purple"><span class="emoji">🍹</span> Hey, space rats! We're out of booze! We need to stop by Planet Base before Doc starts hallucinating.</p>`, consoleScreen);
+            consoleScreen.scrollTop = consoleScreen.scrollHeight;
         }
     },
 
@@ -134,25 +139,31 @@ export const starship = {
 
     checkFuel: function() {
         if (this.technical_stats.fuel_level <= 0) {
-            logMessage("Folks, we’re out of fuel again.")
+            createWrapper(`<p class="purple"><span class="emoji">⛽</span> Folks, we’re out of fuel again.</p>`, consoleScreen)
+            consoleScreen.scrollTop = consoleScreen.scrollHeight;
         }
     },
 
     checkDamage: function() {
         if (this.technical_stats.hull_integrity <= 0 || this.technical_stats.shield_strength <= 0) {
-            logMessage('Too much damage, the ship is in critical condition');
+            createWrapper(`<p class="purple"><span class="emoji">⚠️</span> Too much damage, the ship is in critical condition</p>`, consoleScreen);
+            consoleScreen.scrollTop = consoleScreen.scrollHeight;
+            const breakdown = new Audio('./assets/breakdown.wav');
+            breakdown.play();
         }
     },
 
     checkMorale: function() {
         if (this.technical_stats.crew_morale <= 0) {
-            logMessage('Morale is so low the crew is basically depressed. Let\'s liven up the place')
+            createWrapper(`<p class="purple"><span class="emoji">🥀</span> Morale is so low the crew is basically depressed. Let's liven up the place!`, consoleScreen)
+            consoleScreen.scrollTop = consoleScreen.scrollHeight;
         }
     },
 
     checkAmmo: function() {
         if (this.technical_stats.ammo_levels <= 0) {
-            logMessage('Bad news, crew, we\'re out of ammo!');
+            createWrapper(`<p class="purple"><span class="emoji">🔫</span> Bad news, crew, we're out of ammo!</p>`, consoleScreen);
+            consoleScreen.scrollTop = consoleScreen.scrollHeight;
         }
     },
     

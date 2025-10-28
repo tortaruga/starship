@@ -15,31 +15,35 @@
                 <div class="current-status">
                     <span>current status, some weird long sentence</span>
                 </div>
-                <button id="disco-switch">disco switch toggle</button>
+                <button id="disco-switch">
+                    <img src="./assets/disco.svg" title="disco switch!" alt="icon of disco ball">
+                </button>
             </div>
             <!-- mobile navbar  -->
-            <button id="menu-button">this is the nav button</button>
+            <button id="menu-button">
+                <img src="./assets/menu.svg" alt="menu icon">
+            </button>
             <div class="collapsible-nav hide">
                 <ul> 
-                    <li><button class="nav-btn" data-label="generic">generic</button></li>
-                    <li><button class="nav-btn" data-label="crew">crew</button></li>
-                    <li><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
-                    <li><button class="nav-btn" data-label="cargo">cargo</button></li>
-                    <li><button class="nav-btn" data-label="rooms">rooms</button></li>
-                    <li><button class="nav-btn" data-label="locations">locations</button></li>
-                    <li><button class="nav-btn" data-label="missions">missions</button></li>
+                    <li style="--delay: 0"><button class="nav-btn" data-label="generic">generic</button></li>
+                    <li style="--delay: .2s"><button class="nav-btn" data-label="crew">crew</button></li>
+                    <li style="--delay: .35s"><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
+                    <li style="--delay: .45"><button class="nav-btn" data-label="cargo">cargo</button></li>
+                    <li style="--delay: .6"><button class="nav-btn" data-label="rooms">rooms</button></li>
+                    <li style="--delay: .7"><button class="nav-btn" data-label="locations">locations</button></li>
+                    <li style="--delay: .8"><button class="nav-btn" data-label="missions">missions</button></li>
                 </ul>
             </div>
             <!-- navigation sidebar -->
             <div class="left-sidebar">
                 <ul> 
-                    <li><button class="nav-btn" data-label="generic">generic</button></li>
-                    <li><button class="nav-btn" data-label="crew">crew</button></li>
-                    <li><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
-                    <li><button class="nav-btn" data-label="cargo">cargo</button></li>
-                    <li><button class="nav-btn" data-label="rooms">rooms</button></li>
-                    <li><button class="nav-btn" data-label="locations">locations</button></li>
-                    <li><button class="nav-btn" data-label="missions">missions</button></li>
+                    <li style="--delay: 0"><button class="nav-btn" data-label="generic" >generic</button></li>
+                    <li style="--delay: .2s"><button class="nav-btn" data-label="crew">crew</button></li>
+                    <li style="--delay: .35"><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
+                    <li style="--delay: .45s"><button class="nav-btn" data-label="cargo">cargo</button></li>
+                    <li style="--delay: .6s"><button class="nav-btn" data-label="rooms">rooms</button></li>
+                    <li style="--delay: .7s"><button class="nav-btn" data-label="locations" >locations</button></li>
+                    <li style="--delay: .8s"><button class="nav-btn" data-label="missions">missions</button></li>
                 </ul>
             </div>
 
@@ -156,6 +160,7 @@
             </div>
             <div class="bottom-bar">
                 <div class="event-log">
+                    <h5>Event log</h5>
                     <p id="event-log-message"></p>
                 </div>
 
@@ -184,7 +189,21 @@
                         <button id="detuned"></button>
                         <button id="dramatic"></button>
                     </div>
-                    <div class="track-title">track: mysterious past</div>
+                    <div class="track-title">
+                        <span>track: a mysterious past</span>
+                        <button id="info-btn">
+                            <img src="./assets/info.svg" title="current track info" alt="track info icon">
+                        </button>
+
+                        <div class="track-credits-modal hide"> 
+                            <button class="close"> 
+                                <img src="./assets/close.svg" alt="close modal icon">
+                            </button>
+
+                            <p class="track-info"></p> 
+                            <p>Music by: <span class="credits"></span> </p>
+                        </div>
+                    </div>
                     <button id="piano-btn">
                         <img src="./assets/play.svg" alt="symbol for playing/pausing track">
                     </button>

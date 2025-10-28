@@ -5,20 +5,41 @@
     flex-wrap: wrap; 
     gap: 1rem;
     justify-content: space-between; 
-}
-
-.event-log,
-.piano-corner {
-    background-color: $medium; 
+    align-items: stretch;   
 }
  
 .event-log {
     width: 60%; 
-    min-width: 300px; 
+    // min-width: 300px;  
+    flex-grow: 1; 
+    border-radius: .3rem; 
+    background-color: $medium;   
+    padding: .5rem;
+    font-size: .9rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {color: $yellow;} 
+
+    h5 {
+        margin: .3rem;  
+        font-size: .9rem; 
+        color: $purple; 
+    }
 }
 
 .piano-corner {
     flex-grow: 1; 
+    border-radius: .3rem; 
+    background-color: $medium; 
+    position: relative;
+    padding-inline: 1rem;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     h5 { 
         margin: .5rem;
@@ -30,10 +51,12 @@
     display: flex;
     width: 80%;
     margin-inline: auto; 
-    height: 70px;   
+    height: 70px;    
+    max-width: 400px;    
     position: relative;
+    
 
-    span {
+    span { 
         width: calc(100% / 7);
         height: 100%;
         background-color: $dark; 
@@ -93,7 +116,7 @@
         aspect-ratio: 1; 
         width: 2px;  
         transition: .2s; 
-
+ 
         &:hover {
             background-color: rgba($color: $neon-cyan, $alpha: .6); 
             box-shadow: 0 0 5px;
@@ -107,10 +130,18 @@
 }
 
 .track-title {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: .35rem;   
     font-size: .9rem;
-    max-width: 400px; 
+    max-width: 250px;   
     text-align: center;
-    margin: auto; 
+    margin: auto;
+
+    img {
+        width: 1rem ;
+    }
 }
  
 #piano-btn {
@@ -120,5 +151,57 @@
 
     img {
         max-width: 100%;  
+    }
+}
+
+.track-credits-modal {
+    position: absolute; 
+    background-color: $dark;
+    box-shadow: 0 0 15px #000000d4;      
+    padding: 1rem;  
+    border-radius: .3rem;
+    word-wrap: break-word; 
+    top: 0%;       
+
+    .track-info { 
+        color: $neon-green;
+    }
+
+    p {
+        color: $yellow; 
+    }  
+
+    a {
+        color: $neon-pink; 
+    }
+
+    .close {
+        display: block;
+        margin-left: auto;
+    }
+}
+
+
+.bottom-bar.disco {
+    animation: discoBg-2 8s; 
+}
+
+@keyframes discoBg-2 {
+    7%, 17%, 27%, 40%, 54%, 74%, 80%, 90%, 95% {
+        background-color: $yellow; 
+    } 
+
+    13%, 18%, 20%, 32%, 43%, 53%, 77%, 83%, 92%  {
+        background-color: $dark;  
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .piano-corner {
+        width: 40%;   
+    }
+
+    .event-log {
+        width: 55%; 
     }
 }

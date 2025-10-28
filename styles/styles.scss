@@ -9,15 +9,8 @@
 @import '_locations.scss';
 @import '_missions.scss';
 @import '_bottom-bar.scss';
+@import '_command-console.scss';
 
-
-$dark: #002439; 
-$neon-cyan: #85ffe2;
-$purple: #826ced;
-$neon-pink: #ff54a6;
-$neon-green: #81ec86;  
-$medium: #040823;
-$orange: #ff7f4c; 
 
 * {
     box-sizing: border-box;
@@ -48,6 +41,30 @@ ul {
     padding-left: 0; 
 }
 
+.purple {
+    color: $purple;
+}
+
+.green {
+    color: $neon-green; 
+} 
+
+.pink {
+    color: $neon-pink;
+}
+
+.yellow {
+    color: $yellow;
+}
+
+.orange {
+    color: $orange;
+}
+
+.emoji {
+    text-shadow: none; 
+}
+
 .container {
     background-color: $medium; 
     padding: 1rem;  
@@ -76,7 +93,31 @@ ul {
     display: none; // toggle on click
 }
 
+
+#menu-button { 
+    width: 2rem;  
+    img {
+        max-width: 100%;
+    }
+}
+
+.center-panel.disco {
+    animation: discoBg 8s;    
+}
+
+@keyframes discoBg {
+    5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
+        background-color: $neon-pink;
+    }
+
+    13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90%  {
+        background-color: $dark; 
+    }
+}
+
 // navbar
+
+
 .left-sidebar,
 .collapsible-nav {  
     ul {  
@@ -92,11 +133,10 @@ ul {
             box-shadow: 0 0 5px $neon-green;
             transition: .3s;  
 
-            &:hover {
+            &:hover { 
                 background-color: $neon-cyan; 
                 transform: scale(.99);           
             }
-            
 
             button {
                 border: none;
@@ -106,47 +146,56 @@ ul {
                 color: inherit;
                 font-weight: bold;
                 text-transform: uppercase;   
-                
-            }
+            }  
         }
-    }
-}
 
-// coommand line
-.command-line {
-    min-height: 200px;   
-    display: flex;
-    height: calc(100% - 1rem);
-    flex-direction: column;
-    word-wrap: break-word;
-    justify-content: space-between; 
-
-    .console {
-        overflow: auto; 
-        padding: .5rem;
-        max-height: 500px; 
-        scroll-behavior: smooth;
-    }
+        li.disco {
+                animation: discoBtn 7s linear;     
+                animation-delay: var(--delay);   
+            } 
  
-    #command-line {  
-        margin-top: auto;  
-        background-color: transparent;
-        border: none;
-        border-bottom: 1px solid $neon-cyan;
     }
-
-} 
-
-input:focus {
-    outline: none;
 }
 
-body.keyboard-navigation input:focus {
-    outline: 2px solid $neon-cyan;  
-  }
+@keyframes discoBtn {
+    5%, 20%, 40%, 50% {
+        background-color: $orange;
+    }
+
+    10%, 30%, 60%, 70% {
+        background-color: $purple;
+    }
+
+    15%, 25%, 35%, 45%, 55%, 65%, 90% { 
+        background-color: $yellow;
+    }
+}
+
+.wrapper-div {
+    margin-block-end: 3rem;    
+}
+
+*::-webkit-scrollbar {
+  width: 5px;  
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba($color: $medium, $alpha: .6);  
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 
 
-@media screen and (min-width: 600px) {
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($color: $medium, $alpha: .6) transparent; 
+}
+
+
+@media screen and (min-width: 1000px) {  
     body {
         font-size: 1.1rem;  
     }
@@ -166,7 +215,7 @@ body.keyboard-navigation input:focus {
     .container {
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(12, 1fr); 
-        height: 800px;    
+        height: 900px;    
         max-width: 1500px;  
         margin-inline: auto;  
     }

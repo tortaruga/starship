@@ -69,15 +69,14 @@ function createLevelVisualizer(value, element) {
     el.style.width = `${value}%`;
 }
 
-
-export function logMessage(message) {
-    const wrapper = document.createElement('div');
-    wrapper.textContent = message;
-    consoleScreen.appendChild(wrapper);
-    consoleScreen.scrollTop = consoleScreen.scrollHeight;
-}
-  
 export function handleNegativeLevel(stat) {
   if (stat < 0) stat = 0;
   return stat;
+}
+
+
+export function randomColorClass() {
+  const colorClasses = [ 'green', 'pink', 'yellow', 'orange'];
+  const randomIndex = Math.floor(Math.random() * colorClasses.length);
+  return colorClasses[randomIndex];
 }
