@@ -10,7 +10,7 @@
 
 .credits-settings p {
     font-size: .9rem; 
-    
+
     span {
         color: $yellow;
     }
@@ -69,6 +69,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
+    outline: 3px solid $neon-pink;        
   box-shadow: 0 0 1px $neon-cyan;
 }
 

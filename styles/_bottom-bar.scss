@@ -56,14 +56,14 @@
     position: relative;
     
 
-    span { 
+    button { 
         width: calc(100% / 7);
         height: 100%;
         background-color: $dark; 
         border: 1px solid grey; 
     }
 
-    span.flat {
+    button.flat {
         position: absolute; 
         height: 50%;  
         background-color: $medium; 

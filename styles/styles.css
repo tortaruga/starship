@@ -500,13 +500,13 @@
   max-width: 400px;
   position: relative;
 }
-.piano span {
+.piano button {
   width: 14.2857142857%;
   height: 100%;
   background-color: #002439;
   border: 1px solid grey;
 }
-.piano span.flat {
+.piano button.flat {
   position: absolute;
   height: 50%;
   background-color: #040823;
@@ -743,6 +743,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
+  outline: 3px solid #ff54a6;
   box-shadow: 0 0 1px #85ffe2;
 }
 

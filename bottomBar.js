@@ -115,8 +115,8 @@ pianoBtn.addEventListener('click', () => {
     }
 })
 
-const pianoKeys = document.querySelectorAll('.piano span');
-let animationInterval = null;
+const pianoKeys = document.querySelectorAll('.piano button');
+let animationInterval = null; 
 
 function animateMultipleKeys(count = 2) {
   const indices = new Set();
