@@ -32,6 +32,7 @@
                     <li style="--delay: .6"><button class="nav-btn" data-label="rooms">rooms</button></li>
                     <li style="--delay: .7"><button class="nav-btn" data-label="locations">locations</button></li>
                     <li style="--delay: .8"><button class="nav-btn" data-label="missions">missions</button></li>
+                    <li style="--delay: .85"><button class="nav-btn" data-label="settings">settings</button></li>
                 </ul>
             </div>
             <!-- navigation sidebar -->
@@ -44,6 +45,7 @@
                     <li style="--delay: .6s"><button class="nav-btn" data-label="rooms">rooms</button></li>
                     <li style="--delay: .7s"><button class="nav-btn" data-label="locations" >locations</button></li>
                     <li style="--delay: .8s"><button class="nav-btn" data-label="missions">missions</button></li>
+                    <li style="--delay: .85"><button class="nav-btn" data-label="settings">settings</button></li>
                 </ul>
             </div>
 
@@ -138,12 +140,48 @@
                         <ul id="mission-list"></ul>
 
                         <div id="mission-card" class="hide">
-                        <button id="back-to-mission-list">go back</button>
-                        <p class="mission-objective">objective</p>
-                        <p class="mission-location">location</p>
-                        <button id="go-mission-button">go on mission</button>
-                        <p id="mission-message"></p>
+                            <button id="back-to-mission-list">go back</button>
+                            <p class="mission-objective">objective</p>
+                            <p class="mission-location">location</p>
+                            <button id="go-mission-button">go on mission</button>
+                            <p id="mission-message"></p>
+                        </div>
                     </div>
+
+                    <!-- settings -->
+                    <div class="center-panel-content" id="settings-info">
+                        <h1>Settings</h1>
+                        <div class="main-settings">
+                            <div class="sound-settings">
+                                <p>sound effects: </p>
+
+                                <label class="switch">
+                                   <input type="checkbox" checked> 
+                                   <span class="slider"></span> 
+                                </label>
+                            </div>
+
+                            <div class="credits-settings">
+                                <h3>credits</h3>
+                                <p>- all icons are from <a href="https://www.svgrepo.com/" target="_blank">SVGRepo</a></p>
+
+                                <p>- disco beat playing when clicking the disco switch: <span>Disco Funky Beat</span> by <a href="https://freesound.org/s/257993/" target="_blank">orangefreesounds</a> (License: Attribution 3.0)</p>
+
+                                <p>- ship malfunctioning alert sound: <span>Space Sound - Losing Control</span> by <a href="https://freesound.org/s/254041/" target="_blank">Jagadamba</a> (License: Attribution NonCommercial 4.0)</p>
+
+                                <p>- gun fight sound effects (when stumbling upon rival pirates on missions): <span>Robo gun cinematic(Sytrus,rsmpl,multiprcsng,echo)serial.wav</span> by <a href="https://freesound.org/s/514073/" target="_blank">newlocknew</a> (License: Attribution 4.0)</p>
+
+                                <p>- laser gun effect (encounter with police): <span>BLASTER 2.wav </span>by <a href="https://freesound.org/s/366007/" target="_blank">tutarap</a> (License: Creative Commons 0)</p>
+
+                                <p>- coin sound effect: <span>Coins_Few_37.wav</span> by <a href="https://freesound.org/s/276136/" target="_blank">LittleRobotSoundFactory</a> (License: Attribution 4.0)</p>
+
+                                <p>- message notification (console): <span>Messsage Sent</span> by <a href="https://freesound.org/s/760370/" target="_blank">Froey_</a> License: Creative Commons 0</p>
+
+                                <p>- piano notes (when clicking piano keys): by <a href="https://freesound.org/s/203464/" target="_blank">Tesabob2001</a> (License: Creative Commons 0)</p>
+
+                                <p class="green">For the piano tunes, check the credits by clicking on the "current track info" button in the Piano Corner!</p>
+                            </div>
+                        </div>
                     </div>
             </div>
             <div class="right-sidebar">

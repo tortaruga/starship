@@ -1,4 +1,4 @@
-import { randomColorClass, updateStats } from "./functions.js";
+import { isSoundOn, randomColorClass, updateStats } from "./functions.js";
 import { starship } from "./starship.js";
 const commandInput = document.getElementById('command-line');
 const consoleScreen = document.querySelector('.console');
@@ -12,8 +12,7 @@ export function handleMessages() {
   }
   // Scroll to bottom 
   consoleScreen.scrollTop = consoleScreen.scrollHeight;    
-  console.log('scroll')
-  notificationSound.play();
+  if (isSoundOn()) notificationSound.play();
  
 }
 
@@ -97,9 +96,9 @@ function randomMission() {
     const coinNotification = new Audio('./assets/coins.wav');
     const laserGun = new Audio('./assets/laser-gun.wav');
     const gunFight = new Audio('./assets/gun-fight.wav');
-    if (randomMission.earnedMoney) coinNotification.play();
-    if (randomMission.police) laserGun.play();
-    if (randomMission.fight) gunFight.play();
+    if (randomMission.earnedMoney && isSoundOn()) coinNotification.play();
+    if (randomMission.police && isSoundOn()) laserGun.play();
+    if (randomMission.fight && isSoundOn()) gunFight.play();
 }
 
 function throwParty() {

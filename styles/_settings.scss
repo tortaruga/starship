@@ -1,0 +1,85 @@
+@import '_colors.scss';
+
+#settings-info {
+    padding: .5rem;
+
+    h3 {
+        color: $neon-green;
+    }
+}
+
+.credits-settings p {
+    font-size: .9rem; 
+    
+    span {
+        color: $yellow;
+    }
+
+    a {
+        color: $neon-pink;
+    }
+}
+
+.sound-settings {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;  
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px; 
+    height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+    position: absolute;
+    background-color: $medium;     
+    border-radius: 1rem;    
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; 
+    cursor: pointer;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 80%;  
+  aspect-ratio: 1;
+  left: 4px; 
+  bottom: 3px;
+  background-color: $dark;  
+  border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
+} 
+
+input:checked + .slider {
+  background-color: $neon-cyan;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $neon-cyan;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(40px);   
+  -ms-transform: translateX(40px); 
+  transform: translateX(40px);  
+} 
+
+@media screen and (min-width: 600px) {
+    #settings-info {
+        padding: 2rem;
+    }
+}

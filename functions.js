@@ -80,3 +80,10 @@ export function randomColorClass() {
   const randomIndex = Math.floor(Math.random() * colorClasses.length);
   return colorClasses[randomIndex];
 }
+
+
+const soundToggle = document.querySelector('.switch input');
+
+export function isSoundOn() {
+  return soundToggle.checked;
+}

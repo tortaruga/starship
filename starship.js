@@ -2,7 +2,7 @@ import crewData from "./crewData.js";
 import shipSpacesData from "./shipSpacesData.js";
 import locationsData from "./locationsData.js";
 import missions from "./missions.js";
-import { randomColorClass } from "./functions.js";
+import { isSoundOn, randomColorClass } from "./functions.js";
 import { engineStates } from "./engineStates.js";
 import { createWrapper } from "./commandConsole.js";
 const consoleScreen = document.querySelector('.console');
@@ -149,7 +149,7 @@ export const starship = {
             createWrapper(`<p class="purple"><span class="emoji">⚠️</span> Too much damage, the ship is in critical condition</p>`, consoleScreen);
             consoleScreen.scrollTop = consoleScreen.scrollHeight;
             const breakdown = new Audio('./assets/breakdown.wav');
-            breakdown.play();
+            if (isSoundOn()) breakdown.play();
         }
     },
 

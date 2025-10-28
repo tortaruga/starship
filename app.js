@@ -5,6 +5,7 @@ import './bottomBar.js';
 import './commandConsole.js'; 
 import './topBar.js';
 
+
 function handleFirstTab(e) {
     if (e.key === 'Tab') {
       document.body.classList.add('keyboard-navigation');

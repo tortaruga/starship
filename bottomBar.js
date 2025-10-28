@@ -1,4 +1,5 @@
 // event log
+import { isSoundOn } from "./functions.js";
 
 const events = [
     'Purple goo detected in Medbay <span class="emoji">🟣</span>',
@@ -102,8 +103,12 @@ tuneBtns.forEach(btn => btn.addEventListener('click', () => {
 pianoBtn.addEventListener('click', () => {
      
     if (selectedTune.paused) { 
-        selectedTune.play();
-        document.querySelector('#piano-btn img').setAttribute('src', './assets/pause.svg');
+        if (isSoundOn()) {
+          selectedTune.play();
+          document.querySelector('#piano-btn img').setAttribute('src', './assets/pause.svg');
+        } else {
+          alert('Turn on sound in settings!');
+        }
     } else {
         selectedTune.pause();
         document.querySelector('#piano-btn img').setAttribute('src', './assets/play.svg');
@@ -182,22 +187,22 @@ function closeModal() {
 document.querySelector('.track-credits-modal .close').addEventListener('click', closeModal);
 
 const keyAudios = {
-  a: new Audio('./assets/piano-a.mp3'), 
-  b: new Audio('./assets/piano-b.mp3'),
-  c: new Audio('./assets/piano-c.wav'),
-  d: new Audio('./assets/piano-d.wav'),
-  e: new Audio('./assets/piano-e.wav'),
-  f: new Audio('./assets/piano-f.wav'),
-  g: new Audio('./assets/piano-g.wav'),
-  'd-flat': new Audio('./assets/piano-db.wav'),
-  'e-flat': new Audio('./assets/piano-eb.wav'),
-  'g-flat': new Audio('./assets/piano-gb.wav'),
-  'a-flat': new Audio('./assets/piano-ab.mp3'),
-  'b-flat': new Audio('./assets/piano-bb.mp3'), 
-} 
+  a: './assets/piano-a.mp3', 
+  b: './assets/piano-b.mp3',
+  c: './assets/piano-c.mp3',
+  d: './assets/piano-d.mp3',
+  e: './assets/piano-e.mp3',
+  f: './assets/piano-f.mp3',
+  g: './assets/piano-g.mp3',
+  'd-flat': './assets/piano-db.mp3',
+  'e-flat': './assets/piano-eb.mp3',
+  'g-flat': './assets/piano-gb.mp3',
+  'a-flat': './assets/piano-ab.mp3',
+  'b-flat': './assets/piano-bb.mp3', 
+}  
 
 pianoKeys.forEach(key => key.addEventListener('click', (e) => {
   // check id
   const id = e.target.id;
-  keyAudios[id].play();
+  if (isSoundOn()) new Audio(keyAudios[id]).play();  
 }))

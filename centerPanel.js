@@ -207,14 +207,14 @@ function populateMissionCard(id) {
         createWrapper(result.message, consoleScreen);
 
         handleMessages();
-        
+
         const coinNotification = new Audio('./assets/coins.wav');
        
-        if (result.earnedMoney) coinNotification.play();
+        if (result.earnedMoney && isSoundOn()) coinNotification.play();
         const laserGun = new Audio('./assets/laser-gun.wav');
         const gunFight = new Audio('./assets/gun-fight.wav');
-        if (randomMission.police) laserGun.play();
-        if (randomMission.fight) gunFight.play();
+        if (randomMission.police  && isSoundOn()) laserGun.play();
+        if (randomMission.fight  && isSoundOn()) gunFight.play();
          
     }
 }
