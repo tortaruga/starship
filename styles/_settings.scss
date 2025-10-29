@@ -30,8 +30,8 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 70px; 
-    height: 30px;
+    width: 50px;   
+    height: 20px;
 }
 
 .switch input {
@@ -57,8 +57,8 @@
   height: 80%;  
   aspect-ratio: 1;
   left: 4px; 
-  bottom: 3px;
-  background-color: $dark;  
+  bottom: 2px;  
+  background-color: rgba($color: $neon-cyan, $alpha: .5);    
   border-radius: 50%;
   -webkit-transition: .4s;
   transition: .4s;
@@ -74,9 +74,10 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
+    background-color: $medium;
   -webkit-transform: translateX(40px);   
-  -ms-transform: translateX(40px); 
-  transform: translateX(40px);  
+  -ms-transform: translateX(40px);  
+  transform: translateX(26px);      
 } 
 
 @media screen and (min-width: 600px) {

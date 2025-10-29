@@ -83,7 +83,8 @@ ul {
     background-color: $dark;  
     padding: .5rem;
     border-radius: .5rem; 
-    overflow: auto;   
+    overflow: auto;
+    max-height: 500px;    
 }
 
 .left-sidebar {
@@ -92,14 +93,14 @@ ul {
 
 .hide {
     display: none; // toggle on click
-}
+}  
 
 
 #menu-button { 
     width: 2rem;  
     img {
         max-width: 100%;
-    }
+    } 
 }
 
 .center-panel.disco {
@@ -213,6 +214,15 @@ ul {
         display: none;
     }
 
+    .top-bar,
+    .left-sidebar,
+    .right-sidebar,
+    .bottom-bar, 
+    .center-panel,
+    .collapsible-nav {
+        max-height: unset; 
+    }
+    
     .container {
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(12, 1fr); 
