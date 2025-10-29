@@ -12,47 +12,47 @@
             <!-- topbar -->
             <div class="top-bar">
                 <p class="top-bar-shipname">Clunkerfly</p>
-                <div class="current-status">
-                    <span>current status, some weird long sentence</span>
+                <div class="current-status"  aria-live="polite" aria-label="current status">
+                    <span></span>
                 </div>
-                <button id="disco-switch">
+                <button id="disco-switch" aria-label="turn on disco mode!">
                     <img src="./assets/disco.svg" title="disco switch!" alt="icon of disco ball">
                 </button>
             </div>
             <!-- mobile navbar  -->
-            <button id="menu-button">
+            <button id="menu-button" aria-label="open/close mobile menu">
                 <img src="./assets/menu.svg" alt="menu icon">
             </button>
             <div class="collapsible-nav hide">
                 <ul> 
-                    <li style="--delay: 0"><button class="nav-btn" data-label="generic">generic</button></li>
-                    <li style="--delay: .2s"><button class="nav-btn" data-label="crew">crew</button></li>
-                    <li style="--delay: .35s"><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
-                    <li style="--delay: .45"><button class="nav-btn" data-label="cargo">cargo</button></li>
-                    <li style="--delay: .6"><button class="nav-btn" data-label="rooms">rooms</button></li>
-                    <li style="--delay: .7"><button class="nav-btn" data-label="locations">locations</button></li>
-                    <li style="--delay: .8"><button class="nav-btn" data-label="missions">missions</button></li>
-                    <li style="--delay: .85"><button class="nav-btn" data-label="settings">settings</button></li>
+                    <li style="--delay: 0"><button class="nav-btn" data-label="generic" aria-controls="generic-info">generic</button></li>
+                    <li style="--delay: .2s"><button class="nav-btn" data-label="crew"  aria-controls="crew-info">crew</button></li>
+                    <li style="--delay: .35s"><button class="nav-btn" data-label="ship-systems" aria-controls="ship-systems-info">ship systems</button></li>
+                    <li style="--delay: .45"><button class="nav-btn" data-label="cargo" aria-controls="cargo-info">cargo</button></li>
+                    <li style="--delay: .6"><button class="nav-btn" data-label="rooms" aria-controls="rooms-info">rooms</button></li>
+                    <li style="--delay: .7"><button class="nav-btn" data-label="locations" aria-controls="locations-info">locations</button></li>
+                    <li style="--delay: .8"><button class="nav-btn" data-label="missions" aria-controls="missions-info">missions</button></li>
+                    <li style="--delay: .85"><button class="nav-btn" data-label="settings" aria-controls="settings-info">settings</button></li>
                 </ul>
             </div>
             <!-- navigation sidebar -->
             <div class="left-sidebar">
                 <ul> 
-                    <li style="--delay: 0"><button class="nav-btn" data-label="generic" >generic</button></li>
-                    <li style="--delay: .2s"><button class="nav-btn" data-label="crew">crew</button></li>
-                    <li style="--delay: .35"><button class="nav-btn" data-label="ship-systems">ship systems</button></li>
-                    <li style="--delay: .45s"><button class="nav-btn" data-label="cargo">cargo</button></li>
-                    <li style="--delay: .6s"><button class="nav-btn" data-label="rooms">rooms</button></li>
-                    <li style="--delay: .7s"><button class="nav-btn" data-label="locations" >locations</button></li>
-                    <li style="--delay: .8s"><button class="nav-btn" data-label="missions">missions</button></li>
-                    <li style="--delay: .85"><button class="nav-btn" data-label="settings">settings</button></li>
+                    <li style="--delay: 0"><button class="nav-btn" data-label="generic" aria-controls="generic-info">generic</button></li>
+                    <li style="--delay: .2s"><button class="nav-btn" data-label="crew" aria-controls="crew-info">crew</button></li>
+                    <li style="--delay: .35"><button class="nav-btn" data-label="ship-systems" aria-controls="ship-systems-info">ship systems</button></li>
+                    <li style="--delay: .45s"><button class="nav-btn" data-label="cargo" aria-controls="cargo-info">cargo</button></li>
+                    <li style="--delay: .6s"><button class="nav-btn" data-label="rooms" aria-controls="rooms-info">rooms</button></li>
+                    <li style="--delay: .7s"><button class="nav-btn" data-label="locations" aria-controls="locations-info">locations</button></li>
+                    <li style="--delay: .8s"><button class="nav-btn" data-label="missions" aria-controls="missions-info">missions</button></li>
+                    <li style="--delay: .85"><button class="nav-btn" data-label="settings" aria-controls="settings-info">settings</button></li>
                 </ul>
             </div>
 
             <!-- center panel -->
             <div class="center-panel">
-                <!-- generic -->
-                 <div class="center-panel-content" id="generic-info">
+                <!-- generic info -->
+                <div class="center-panel-content" id="generic-info">
                     <h1>Starship Generics</h1>
                     <p id="starship-name">name: </p>
                     <p id="starship-model">model: </p>
@@ -76,33 +76,33 @@
                  <!-- system -->
                   <div class="center-panel-content" id="ship-systems-info">
                     <h1>stats</h1>
-                    <p class="stats-speed">speed</p>
+                    <p class="stats-speed" aria-live="polite" aria-label="speed value"></p>
 
                     <div class="stats-fuel">
-                        <span>fuel level:</span>
-                        <div class="fuel-visualizer bar-visualizer"></div>
+                        <span id="fuel-level">fuel level:</span>
+                        <div class="fuel-visualizer bar-visualizer" aria-labelledby="fuel-level" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
-                    <p class="stats-engine">engine state</p>
+                    <p class="stats-engine" aria-live="polite" aria-label="engine status"></p>
                     <div class="stats-ammo">
-                        <span>ammo levels: </span>
-                        <div class="ammo-visualizer level-visualizer">
+                        <span id="ammo-levels">ammo levels: </span>
+                        <div class="ammo-visualizer level-visualizer" aria-labelledby="ammo-levels" role="progressbar" aria-valuemax="100" aria-valuemin="0">
                             <span class="inner-level"></span>
                         </div>
                     </div>
 
                     <div class="stats-shields">
-                        <span>shield strength: </span>
-                        <div class="shields-visualizer bar-visualizer"></div>
+                        <span id="shield-strength">shield strength: </span>
+                        <div class="shields-visualizer bar-visualizer" aria-labelledby="shield-strength" aria-valuemax="100" aria-valuemin="0"></div>
                     </div>
 
                     <div class="stats-hull">
-                        <span>hull integrity: </span>
-                        <div class="hull-visualizer bar-visualizer"></div>
+                        <span id="hull-integrity">hull integrity: </span>
+                        <div class="hull-visualizer bar-visualizer" aria-labelledby="hull-integrity" aria-valuemax="100" aria-valuemin="0"></div>
                     </div>
                     <div class="stats-morale">
-                        <span>crew morale: </span>
-                        <div class="morale-visualizer level-visualizer">
+                        <span id="crew-morale">crew morale: </span>
+                        <div class="morale-visualizer level-visualizer" aria-labelledby="crew-morale" role="progressbar" aria-valuemax="100" aria-valuemin="0">
                             <span class="inner-level"></span>
                         </div>
                     </div>
@@ -114,9 +114,9 @@
                     <ul id="room-list"></ul>
 
                     <div id="room-card" class="hide">
-                        <button id="back-to-room-list">go back</button>
-                        <p class="room-name">name</p>
-                        <p class="room-description">description</p>
+                        <button id="back-to-room-list"></button>
+                        <p class="room-name"></p>
+                        <p class="room-description"></p>
                         <button id="go-to-button">go to room</button>
                         <p id="room-message"></p>
                     </div>
@@ -140,7 +140,7 @@
                         <ul id="mission-list"></ul>
 
                         <div id="mission-card" class="hide">
-                            <button id="back-to-mission-list">go back</button>
+                            <button id="back-to-mission-list" >go back</button>
                             <p class="mission-objective">objective</p>
                             <p class="mission-location">location</p>
                             <button id="go-mission-button">go on mission</button>
@@ -153,10 +153,10 @@
                         <h1>Settings</h1>
                         <div class="main-settings">
                             <div class="sound-settings">
-                                <p>sound effects: </p>
+                                <p id="sound-settings-toggle">sound effects: </p>
 
-                                <label class="switch">
-                                   <input type="checkbox" checked> 
+                                <label class="switch" for="sound-toggle">
+                                   <input type="checkbox" checked id="sound-toggle" aria-labelledby="sound-settings-toggle"> 
                                    <span class="slider"></span> 
                                 </label>
                             </div>
@@ -187,54 +187,54 @@
             <div class="right-sidebar">
 
                 <div class="command-line">
-                    <div class="console"></div>
+                    <div class="console" aria-label="console" aria-live="polite"></div>
 
                     <div class="instructions">
                         <p>command console. type "help" to see possible commands</p>
                     </div>
 
-                    <input type="text" name="command-line" id="command-line" placeholder="enter command">
+                    <input type="text" aria-label="enter command here" name="command-line" id="command-line" placeholder="enter command">
                 </div>
             </div>
             <div class="bottom-bar">
                 <div class="event-log">
                     <h5>Event log</h5>
-                    <p id="event-log-message"></p>
+                    <p id="event-log-message" aria-live="polite" aria-label="random event log"></p>
                 </div>
 
                 <div class="piano-corner">
                     <h5>doc's piano corner</h5>
                     <div class="piano">
-                        <button id="c"></button>
-                        <button id="d-flat" class="flat"></button>
-                        <button id="d"></button>
-                        <button id="e-flat" class="flat"></button>
-                        <button id="e"></button>
-                        <button id="f"></button>
-                        <button id="g-flat" class="flat"></button>
-                        <button id="g"></button>
-                        <button id="a-flat" class="flat"></button>
-                        <button id="a"></button>
-                        <button id="b-flat" class="flat"></button>
-                        <button id="b"></button>
-
+                        <button id="c" aria-label="piano key C"></button>
+                        <button id="d-flat" class="flat" aria-label="piano key D flat"></button>
+                        <button id="d" aria-label="piano key D"></button>
+                        <button id="e-flat" class="flat" aria-label="piano key E flat"></button>
+                        <button id="e" aria-label="piano key E"></button>
+                        <button id="f" aria-label="piano key F"></button>
+                        <button id="g-flat" class="flat" aria-label="piano key G flat"></button>
+                        <button id="g" aria-label="piano key G"></button>
+                        <button id="a-flat" class="flat" aria-label="piano key A flat"></button>
+                        <button id="a" aria-label="piano key A"></button>
+                        <button id="b-flat" class="flat" aria-label="piano key B flat"></button>
+                        <button id="b" aria-label="piano key B"></button>
                     </div>
 
                     <div class="select-tune">
-                        <button id="sad" class="active"></button>
-                        <button id="mad"></button>
-                        <button id="virtuoso"></button>
-                        <button id="detuned"></button>
-                        <button id="dramatic"></button>
+                        <button id="sad" class="active" aria-label="select sad tune"></button>
+                        <button id="mad" aria-label="select mad tune"></button>
+                        <button id="virtuoso" aria-label="select virtuoso tune"></button>
+                        <button id="detuned" aria-label="select detuned tune"></button>
+                        <button id="dramatic" aria-label="select dramatic tune"></button>
                     </div>
+
                     <div class="track-title">
                         <span>track: a mysterious past</span>
-                        <button id="info-btn">
+                        <button id="info-btn" aria-label="open current track info">
                             <img src="./assets/info.svg" title="current track info" alt="track info icon">
                         </button>
 
                         <div class="track-credits-modal hide"> 
-                            <button class="close"> 
+                            <button class="close" aria-label="close track credits modal"> 
                                 <img src="./assets/close.svg" alt="close modal icon">
                             </button>
 
@@ -242,7 +242,8 @@
                             <p>Music by: <span class="credits"></span> </p>
                         </div>
                     </div>
-                    <button id="piano-btn">
+
+                    <button id="piano-btn" aria-label="play/pause piano tune">
                         <img src="./assets/play.svg" alt="symbol for playing/pausing track">
                     </button>
                 </div>

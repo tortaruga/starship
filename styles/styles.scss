@@ -247,3 +247,11 @@ ul {
     }
 
 }
+
+@media (prefers-reduced-motion: reduce) {
+    li.disco, 
+    .center-panel.disco, 
+    .instructions p.disco {
+        animation: none;
+    }
+}

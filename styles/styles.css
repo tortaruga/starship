@@ -965,4 +965,11 @@ ul {
     grid-column: 3/13;
     grid-row: 10/13;
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  li.disco,
+  .center-panel.disco,
+  .instructions p.disco {
+    animation: none;
+  }
 }/*# sourceMappingURL=styles.css.map */

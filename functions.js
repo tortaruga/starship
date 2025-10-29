@@ -1,7 +1,5 @@
 import { engineStates } from "./engineStates.js";
 
-const consoleScreen = document.querySelector('.console');
-
 export function updateStats(ship) {
 
     createBarVisualizer(ship.technical_stats.fuel_level, document.querySelector('.fuel-visualizer'));
@@ -45,6 +43,8 @@ export function createBarVisualizer(value, element) {
       updateBarFill(span, incompleteBars * 10);
     }
   }
+  
+  element.setAttribute('aria-valuenow', value);
 }
 
 function updateBarFill(span, targetPercent) {
@@ -66,7 +66,8 @@ function updateBarFill(span, targetPercent) {
 function createLevelVisualizer(value, element) {
     const el =  document.querySelector(`.${element} .inner-level`);
     if (value < 0) value = 0;
-    el.style.width = `${value}%`;
+    el.style.width = `${value}%`; 
+    el.setAttribute('aria-valuenow', value); 
 }
 
 export function handleNegativeLevel(stat) {
