@@ -1,12 +1,12 @@
-@import '_colors.scss';
+@use '../base';    
+
+@include base.marquee;
 
 // topbar  
 .container .top-bar {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    @include base.flex(space-between, center);
     overflow: hidden;
-    gap: .75rem; 
+    gap: .75rem;  
 }  
 
 .current-status { 
@@ -20,21 +20,15 @@
         white-space: nowrap;   
         display: inline-block;   
         transform: translateX(120%);    
-        animation: marquee 10s steps(20) both infinite; 
-        color: $orange; 
+        animation: marqueeAnimation 10s steps(20) both infinite; 
+        color: base.$orange; 
         font-weight: bold;      
     }
 }
 
-#disco-switch {
+#disco-switch { 
     img {
         width: 1.5rem;   
-    }
-}
-
-@keyframes marquee {
-    to {
-        transform: translateX(-120%); 
     }
 }
 
@@ -42,9 +36,8 @@
     font-weight: bold;  
     text-transform: uppercase; 
     letter-spacing: .02rem;
-    color: $yellow;   
+    color: base.$yellow;   
 }
-
 
 @media screen and (min-width: 600px) {
     .top-bar-shipname {

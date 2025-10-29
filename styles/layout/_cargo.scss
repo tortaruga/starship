@@ -1,35 +1,29 @@
-@import '_colors.scss';
+@use '../base';
 
 #cargo-info {
     padding: .5rem;
 }
 
 #cargo-list li {
-    background-color: rgba($color: $medium, $alpha: .6);
-    border-radius: .3rem;
-    padding: .75rem; 
-    margin-bottom: .75rem;  
+      @include base.list2;
 } 
 
 .item-name {
-    color: $yellow;
-    display: flex;
-    align-items: center;
+    color: base.$yellow;
+    @include base.flex(space-between, center);
     gap: .75rem; 
-    justify-content: space-between; 
     font-size: 1.2rem; 
 }
 
 .item-amount {
-    color: $neon-pink;
+    color: base.$neon-pink;
     font-weight: bold;
     font-size: 1.1rem; 
 }
 
 .item-tag {
-    background-color: $purple;
-    color: $medium; 
-    // color: white;   
+    background-color: base.$purple;
+    color: base.$medium;
     padding: .15rem .3rem; 
     border-radius: .3rem;
     font-size: .9rem; 

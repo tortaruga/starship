@@ -1,45 +1,40 @@
-@import '_colors.scss';
+@use '../base';
+
+@include base.piano; 
+@include base.disco;
 
 .bottom-bar {
-    display: flex;
+    @include base.flex(space-between, stretch);
     flex-wrap: wrap; 
     gap: 1rem;
-    justify-content: space-between; 
-    align-items: stretch;   
 }
  
 .event-log {
+    @include base.flex(center, stretch, column);
     width: 60%; 
-    // min-width: 300px;  
     flex-grow: 1; 
     border-radius: .3rem; 
-    background-color: $medium;   
+    background-color: base.$medium;   
     padding: .5rem;
+    text-align: center; 
     font-size: .9rem; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-    p {color: $yellow;} 
+    p {color: base.$yellow;} 
 
     h5 {
         margin: .3rem;  
         font-size: .9rem; 
-        color: $purple; 
+        color: base.$purple; 
     }
 }
 
 .piano-corner {
+    @include base.flex(center, center, column);
     flex-grow: 1; 
     border-radius: .3rem; 
-    background-color: $medium; 
+    background-color: base.$medium; 
     position: relative;
-    padding-inline: 1rem;  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding-inline: 1rem;
 
     h5 { 
         margin: .5rem;
@@ -59,14 +54,14 @@
     button { 
         width: calc(100% / 7);
         height: 100%;
-        background-color: $dark; 
+        background-color: base.$dark; 
         border: 1px solid grey; 
     }
 
     button.flat {
         position: absolute; 
         height: 50%;  
-        background-color: $medium; 
+        background-color: base.$medium; 
     }
  
     #d-flat {
@@ -98,11 +93,6 @@
     animation: pianoAnimate 1s;  
 }
 
-@keyframes pianoAnimate {
-    50% {
-        background-color: $neon-cyan;  
-    }
-}
 
 .select-tune {
     display: flex;
@@ -111,28 +101,26 @@
     margin-block: .4rem; 
 
     button {
-        background-color: $dark;
+        background-color: base.$dark;
         border-radius: 50%;
         aspect-ratio: 1; 
         width: 2px;  
         transition: .2s; 
  
         &:hover {
-            background-color: rgba($color: $neon-cyan, $alpha: .6); 
+            background-color: rgba($color: base.$neon-cyan, $alpha: .6); 
             box-shadow: 0 0 5px;
         }
     }
 
     button.active {
-        background-color: $neon-cyan; 
+        background-color: base.$neon-cyan; 
         box-shadow: 0 0 5px;  
     }
 }
 
 .track-title {
-    display: flex;
-    align-items: center; 
-    justify-content: center;
+    @include base.flex(center, center);
     gap: .35rem;   
     font-size: .9rem;
     max-width: 250px;   
@@ -156,7 +144,7 @@
 
 .track-credits-modal {
     position: fixed; 
-    background-color: $dark;
+    background-color: base.$dark;
     box-shadow: 0 0 25px #000000d4;       
     padding: 1rem;  
     border-radius: .3rem;
@@ -168,16 +156,16 @@
     transform: translate(-50%, -50%);        
 
     .track-info { 
-        color: $neon-green; 
+        color: base.$neon-green; 
         padding-bottom: 1.25rem;    
     }
 
     p {
-        color: $yellow; 
+        color: base.$yellow; 
     }  
 
     a {
-        color: $neon-pink; 
+        color: base.$neon-pink; 
     }
 
     .close {
@@ -189,16 +177,6 @@
 
 .bottom-bar.disco {
     animation: discoBg-2 8s; 
-}
-
-@keyframes discoBg-2 {
-    7%, 17%, 27%, 40%, 54%, 74%, 80%, 90%, 95% {
-        background-color: $yellow; 
-    } 
-
-    13%, 18%, 20%, 32%, 43%, 53%, 77%, 83%, 92%  {
-        background-color: $dark;  
-    }
 }
 
 @media screen and (min-width: 1000px) {

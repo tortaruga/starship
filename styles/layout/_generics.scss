@@ -1,7 +1,7 @@
-@import '_colors.scss';
+@use '../base';
 
 #generic-info span {
-    color: $neon-pink;
+    color: base.$neon-pink;
     text-transform: uppercase;
     text-shadow: 0 0 5px; 
     font-size: 1.3rem; 
@@ -9,10 +9,10 @@
 } 
 
 #starship-description {
-    background-color: rgba($color: $medium, $alpha: .6); 
+    background-color: rgba($color: base.$medium, $alpha: .6); 
     padding: .5rem; 
     border-radius: .4rem;   
-    color: $neon-green;  
+    color: base.$neon-green;  
 }
 
 @media screen and (min-width: 600px) {

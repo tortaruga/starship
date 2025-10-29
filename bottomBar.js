@@ -34,8 +34,8 @@ const infoBtn = document.getElementById('info-btn');
 
 const tunes = {
   sadTune: {
-    audio: new Audio('./assets/sad-piano.mp3'), 
-    path: '/assets/sad-piano.mp3',
+    audio: new Audio('./assets/piano-tunes/sad-piano.mp3'), 
+    path: '/assets/piano-tunes/sad-piano.mp3',
     title: 'a mysterious past',
     info: 'What\'s his real name? Where does he come from? Where did he learn all the nonsense he continually spouts? And why does he play such heart-wrenching tunes when the ship feels particularly silent?',
     func: animateRandomKey,
@@ -44,8 +44,8 @@ const tunes = {
   },
 
   madTune: {
-    audio: new Audio('./assets/mad-piano.mp3'),
-    path: '/assets/mad-piano.mp3',
+    audio: new Audio('./assets/piano-tunes/mad-piano.mp3'),
+    path: '/assets/piano-tunes/mad-piano.mp3',
     title: 'runaways',
     info: 'Joyously played while running away from justice, with laser guns blasting around, the crew shouting profanities, and the Captain piloting even worse than usual, if possible.',
     func: animateMultipleKeys,
@@ -54,8 +54,8 @@ const tunes = {
   },
 
   detunedTune: {
-    audio: new Audio('./assets/detuned-piano.wav'),
-    path: '/assets/detuned-piano.wav',
+    audio: new Audio('./assets/piano-tunes/detuned-piano.wav'),
+    path: '/assets/piano-tunes/detuned-piano.wav',
     title: 'are you bleeding?',
     info: 'It\'s just possible that he just collapsed on the keys after suffering a wound.',
     func: animateMultipleKeys,
@@ -64,8 +64,8 @@ const tunes = {
   },
 
   dramaticTune: {
-    audio: new Audio('./assets/dramatic-piano.wav'),
-    path: '/assets/dramatic-piano.wav',
+    audio: new Audio('./assets/piano-tunes/dramatic-piano.wav'),
+    path: '/assets/piano-tunes/dramatic-piano.wav',
     title: 'now, really?',
     info: 'Usually played at the worst possible times.',
     func: animateRandomKey,
@@ -74,8 +74,8 @@ const tunes = {
   },
 
   virtuosoTune: {
-    audio: new Audio('./assets/virtuoso-piano.wav'),
-    path: '/assets/virtuoso-piano.wav',
+    audio: new Audio('./assets/piano-tunes/virtuoso-piano.wav'),
+    path: '/assets/piano-tunes/virtuoso-piano.wav',
     title: 'just let us sleep',
     info: 'Played as loudly as possible, deep into the night, when the rest of the crew is trying to get some sleep.',
     func: animateMultipleKeys,
@@ -92,7 +92,7 @@ tuneBtns.forEach(btn => btn.addEventListener('click', () => {
 
   if (!selectedTune.paused) {
     selectedTune.pause();
-    document.querySelector('#piano-btn img').setAttribute('src', './assets/play.svg');
+    document.querySelector('#piano-btn img').setAttribute('src', './assets/icons/play.svg');
   };
 
   selectedTune = tunes[`${btn.id}Tune`].audio;
@@ -105,13 +105,13 @@ pianoBtn.addEventListener('click', () => {
     if (selectedTune.paused) { 
         if (isSoundOn()) {
           selectedTune.play();
-          document.querySelector('#piano-btn img').setAttribute('src', './assets/pause.svg');
+          document.querySelector('#piano-btn img').setAttribute('src', './assets/icons/pause.svg');
         } else {
           alert('Turn on sound in settings!');
         }
     } else {
         selectedTune.pause();
-        document.querySelector('#piano-btn img').setAttribute('src', './assets/play.svg');
+        document.querySelector('#piano-btn img').setAttribute('src', './assets/icons/play.svg');
     }
 })
 
@@ -164,7 +164,7 @@ Object.values(tunes).forEach(tune => {
   tune.audio.addEventListener('pause', stopAnimatingKeys);
   tune.audio.addEventListener('ended', () => {
     stopAnimatingKeys();
-    document.querySelector('#piano-btn img').setAttribute('src', './assets/play.svg');
+    document.querySelector('#piano-btn img').setAttribute('src', './assets/icons/play.svg');
   });
 });
 
@@ -187,18 +187,18 @@ function closeModal() {
 document.querySelector('.track-credits-modal .close').addEventListener('click', closeModal);
 
 const keyAudios = {
-  a: './assets/piano-a.mp3', 
-  b: './assets/piano-b.mp3',
-  c: './assets/piano-c.mp3',
-  d: './assets/piano-d.mp3',
-  e: './assets/piano-e.mp3',
-  f: './assets/piano-f.mp3',
-  g: './assets/piano-g.mp3',
-  'd-flat': './assets/piano-db.mp3',
-  'e-flat': './assets/piano-eb.mp3',
-  'g-flat': './assets/piano-gb.mp3',
-  'a-flat': './assets/piano-ab.mp3',
-  'b-flat': './assets/piano-bb.mp3', 
+  a: './assets/piano-notes/piano-a.mp3', 
+  b: './assets/piano-notes/piano-b.mp3',
+  c: './assets/piano-notes/piano-c.mp3',
+  d: './assets/piano-notes/piano-d.mp3',
+  e: './assets/piano-notes/piano-e.mp3',
+  f: './assets/piano-notes/piano-f.mp3',
+  g: './assets/piano-notes/piano-g.mp3',
+  'd-flat': './assets/piano-notes/piano-db.mp3',
+  'e-flat': './assets/piano-notes/piano-eb.mp3',
+  'g-flat': './assets/piano-notes/piano-gb.mp3',
+  'a-flat': './assets/piano-notes/piano-ab.mp3',
+  'b-flat': './assets/piano-notes/piano-bb.mp3', 
 }  
 
 pianoKeys.forEach(key => key.addEventListener('click', (e) => {

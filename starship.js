@@ -148,7 +148,7 @@ export const starship = {
         if (this.technical_stats.hull_integrity <= 0 || this.technical_stats.shield_strength <= 0) {
             createWrapper(`<p class="purple"><span class="emoji">⚠️</span> Too much damage, the ship is in critical condition</p>`, consoleScreen);
             consoleScreen.scrollTop = consoleScreen.scrollHeight;
-            const breakdown = new Audio('./assets/breakdown.wav');
+            const breakdown = new Audio('./assets/sound-effects/breakdown.wav');
             if (isSoundOn()) breakdown.play();
         }
     },

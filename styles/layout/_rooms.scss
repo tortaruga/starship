@@ -1,0 +1,36 @@
+@use '../base';
+
+#room-list li {
+    @include base.list;
+}
+
+.room-name span {   
+    color: base.$neon-pink;
+    font-size: 1.1rem;  
+} 
+
+#room-card {
+    @include base.card;
+}
+
+#back-to-room-list {
+    @include base.backToListBtn; 
+}
+
+#go-to-button {
+    @include base.actionBtn; 
+}
+
+#room-message {
+    color: base.$purple; 
+}
+
+@media screen and (min-width: 600px) {
+    #rooms-info {
+        padding: 2rem; 
+    }
+
+    #room-card {
+        padding: 1.5rem;      
+    }
+} 

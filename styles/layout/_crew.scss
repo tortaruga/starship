@@ -1,0 +1,31 @@
+@use '../base';
+
+#crew-list li {
+    @include base.list;
+}
+
+#member-card {
+    @include base.card;
+}
+
+#back-to-crew-list {
+    @include base.backToListBtn;
+}
+
+#talk-button {
+    @include base.actionBtn;
+}
+
+#member-message {
+    color: base.$purple; 
+}
+
+@media screen and (min-width: 600px) {
+    #crew-info {
+        padding: 2rem;
+    }
+
+    #member-card {
+        padding: 1.5rem;      
+    }
+}

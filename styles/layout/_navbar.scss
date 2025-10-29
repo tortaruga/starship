@@ -1,0 +1,34 @@
+@use '../base';
+@include base.disco;
+
+.left-sidebar,
+.collapsible-nav {  
+    ul {  
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;  
+
+        li {
+            @include base.navLi;
+
+            button {
+                @include base.navBtn;   
+            }  
+        }
+
+        // party mode when disco switch is on
+        li.disco {
+                animation: discoBtn 7s linear;     
+                animation-delay: var(--delay);   
+            } 
+ 
+    }
+}
+
+#menu-button { 
+    width: 2rem;  
+       img {
+        max-width: 100%;
+    } 
+}
+

@@ -1,0 +1,113 @@
+@use '../base';
+
+@include base.disco;
+
+* {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace; 
+    color: base.$neon-cyan;
+}
+
+body.loading {
+  visibility: hidden;
+} 
+
+body {
+    margin: 0;
+    background-color: base.$dark;
+    padding: 1rem; 
+    text-shadow: 0 0 5px; 
+    font-size: .95rem;  
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent; 
+}
+
+ul {
+    list-style-type: none; 
+    padding-left: 0; 
+}
+
+.hide {
+    display: none;
+}  
+
+.purple {
+    color: base.$purple;
+}
+
+.green {
+    color: base.$neon-green; 
+} 
+
+.pink {
+    color: base.$neon-pink;
+}
+
+.yellow {
+    color: base.$yellow;
+}
+
+.orange {
+    color: base.$orange;
+}
+
+.emoji {
+    text-shadow: none; 
+}
+
+.container {
+    background-color: base.$medium; 
+    padding: 1rem;  
+    border-radius: .5rem;
+    display: grid;
+    gap: .5rem; 
+}
+
+.top-bar,
+.left-sidebar,
+.right-sidebar,
+.bottom-bar,
+.center-panel,
+.collapsible-nav { 
+    background-color: base.$dark;  
+    padding: .5rem;
+    border-radius: .5rem; 
+    overflow: auto;
+    max-height: 500px;    
+}
+
+.left-sidebar {
+    display: none;
+}
+ 
+.center-panel.disco {
+    animation: discoBg 8s;    
+}
+
+.wrapper-div {
+    margin-block-end: 3rem;    
+}
+
+// scrollbar
+*::-webkit-scrollbar {
+  width: 5px;  
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba($color: base.$medium, $alpha: .6);  
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($color: base.$medium, $alpha: .6) transparent; 
+}

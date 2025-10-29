@@ -1,10 +1,10 @@
-@import '_colors.scss';
+@use '../base';
 
 #settings-info {
     padding: .5rem;
 
     h3 {
-        color: $neon-green;
+        color: base.$neon-green;
     }
 }
 
@@ -12,18 +12,16 @@
     font-size: .9rem; 
 
     span {
-        color: $yellow;
+        color: base.$yellow;
     }
 
     a {
-        color: $neon-pink;
+        color: base.$neon-pink;
     }
 }
 
 .sound-settings {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    @include base.flex(flex-start, center);
     gap: 1rem;  
 }
 
@@ -42,7 +40,7 @@
 
 .slider {
     position: absolute;
-    background-color: $medium;     
+    background-color: base.$medium;     
     border-radius: 1rem;    
     top: 0;
     left: 0;
@@ -58,23 +56,23 @@
   aspect-ratio: 1;
   left: 4px; 
   bottom: 2px;  
-  background-color: rgba($color: $neon-cyan, $alpha: .5);    
+  background-color: rgba($color: base.$neon-cyan, $alpha: .5);    
   border-radius: 50%;
   -webkit-transition: .4s;
   transition: .4s;
 } 
 
 input:checked + .slider {
-  background-color: $neon-cyan;
+  background-color: base.$neon-cyan;
 }
 
 input:focus + .slider {
-    outline: 3px solid $neon-pink;        
-  box-shadow: 0 0 1px $neon-cyan;
+    outline: 3px solid base.$neon-pink;        
+  box-shadow: 0 0 1px base.$neon-cyan;
 }
 
 input:checked + .slider:before {
-    background-color: $medium;
+    background-color: base.$medium;
   -webkit-transform: translateX(40px);   
   -ms-transform: translateX(40px);  
   transform: translateX(26px);      

@@ -1,0 +1,38 @@
+@use '../base';
+
+#mission-list li {
+    @include base.list;
+}
+
+#mission-card {
+    @include base.card;
+}
+
+#back-to-mission-list {
+    @include base.backToListBtn;
+}
+
+#go-mission-button {
+    @include base.actionBtn;
+} 
+
+
+#mission-message {
+    color: base.$purple; 
+}
+
+.mission-objective span,
+.mission-location span {
+    color: base.$neon-pink;
+    font-size: 1.1rem; 
+}
+
+@media screen and (min-width: 600px) {
+    #missions-info {
+        padding: 2rem;
+    }
+ 
+    #mission-card {
+        padding: 1.5rem;      
+    }
+}

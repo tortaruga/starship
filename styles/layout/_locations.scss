@@ -1,22 +1,17 @@
- @import '_colors.scss';
+@use '../base';
 
 #locations-info {
     padding: .5rem;
 }
 
 #location-list li {
-    background-color: rgba($color: $medium, $alpha: .6);
-    border-radius: .3rem;
-    padding: .75rem; 
-    margin-bottom: .75rem;   
+    @include base.list2;
 } 
 
 .location-name {
-    color: $yellow;
-    display: flex;
-    align-items: center;
+    color: base.$yellow;
+    @include base.flex(space-between, center);
     gap: .75rem; 
-    justify-content: space-between; 
     font-size: 1.2rem; 
 }
 

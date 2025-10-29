@@ -1,18 +1,18 @@
-@import '_colors.scss';
+@use '../base';
+
+@include base.disco;
 
 // coommand line
 .command-line {
     min-height: 200px;   
-    display: flex;
+    @include base.flex(flex-end, stretch, column);
     height: calc(100% - 1rem);
-    flex-direction: column;
     word-wrap: break-word;
-    justify-content: flex-end;
     font-size: .9rem; 
  
     .instructions p {  
         font-size: .9rem;
-        color: $purple;
+        color: base.$purple; 
     } 
 
     .instructions p.disco {
@@ -30,10 +30,10 @@
     #command-line { 
         background-color: transparent;
         border: none;
-        border-bottom: 1px solid $neon-cyan;
+        border-bottom: 1px solid base.$neon-cyan;
 
         &::placeholder {
-            color: rgba($color: $neon-cyan, $alpha: .6);   
+            color: rgba($color: base.$neon-cyan, $alpha: .6);   
         }
     }
 
@@ -44,20 +44,5 @@ input:focus {
 }
 
 body.keyboard-navigation input:focus {
-    outline: 2px solid $neon-cyan;  
-}
-
-
-@keyframes discoText {
-    5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
-        color: $neon-green;
-    }
-    
-    0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
-        color: $neon-pink;
-    }
-
-    7%, 17%, 27%, 37%, 47%, 57%, 67%, 77%, 87%, 97% {
-        color: $neon-cyan;
-    }
+    outline: 2px solid base.$neon-cyan;  
 }

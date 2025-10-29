@@ -1,0 +1,181 @@
+@use 'colors';
+
+@mixin flex($justify, $align, $direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;   
+}
+
+
+@mixin list() {
+    position: relative;
+    width: max-content; 
+    margin-bottom: .5rem;
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 0%;
+        height: 1.5px; 
+        bottom: -12%;   
+        left: 0;
+        transition: .4s; 
+        background-color: colors.$neon-cyan; 
+        box-shadow: 0 0 5px; 
+    }
+
+    &:hover::after {
+        width: 80%;  
+    }
+}
+
+@mixin card() {
+    padding: .5rem;
+    
+    &:not(.hide) {
+    background-color: rgba($color: colors.$medium, $alpha: .6);
+    border-radius: .4rem;   
+    
+    span {
+        color: colors.$neon-pink; 
+    }
+}
+}
+
+
+@mixin backToListBtn() {
+    border: 1px solid;
+    color: colors.$orange; 
+    border-radius: .3rem;
+    padding: .25rem .5rem;  
+    display: block;
+    margin-left: auto; 
+    transition: .5s; 
+
+    &:hover {
+        background-color: colors.$orange;
+        color: colors.$medium; 
+    }
+}
+
+ 
+@mixin actionBtn() {
+    background-color: colors.$neon-green;
+    color: colors.$medium; 
+    border-radius: .3rem;
+    font-weight: bold;
+    font-size: .95rem; 
+    transition: .3s;
+
+    &:hover {
+        background-color: colors.$neon-cyan;
+    }
+}
+
+@mixin list2() {
+    background-color: rgba($color: colors.$medium, $alpha: .6);
+    border-radius: .3rem;
+    padding: .75rem; 
+    margin-bottom: .75rem;
+}
+
+
+@mixin navBtn() {
+    border: none;
+    background-color: transparent; 
+    width: 100%; 
+    text-align: left; 
+    color: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+ 
+@mixin navLi() {
+    border-radius: .25rem;
+    background-color: colors.$neon-green;  
+    color: colors.$medium;       
+    padding: .25rem; 
+    box-shadow: 0 0 5px colors.$neon-green;
+    transition: .3s;  
+
+    &:hover { 
+        background-color: colors.$neon-cyan; 
+        transform: scale(.99);           
+    } 
+}
+
+
+@mixin reducedMotion() {
+    @media (prefers-reduced-motion: reduce) {
+    li.disco, 
+    .center-panel.disco, 
+    .instructions p.disco {
+        animation: none;
+    }
+}
+}
+
+@mixin bigScreensMediaQuery() {
+@media screen and (min-width: 1000px) {  
+    body {
+        font-size: 1.1rem;  
+    } 
+
+    button {
+        font-size: inherit; 
+    }
+
+    .left-sidebar {
+        display: inline-block;
+    } 
+
+    #menu-button, .collapsible-nav {
+        display: none;
+    }
+
+    .top-bar,
+    .left-sidebar,
+    .right-sidebar,
+    .bottom-bar, 
+    .center-panel,
+    .collapsible-nav {
+        max-height: unset; 
+    }
+    
+    .container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(12, 1fr); 
+        height: 900px;    
+        max-width: 1500px;  
+        margin-inline: auto;  
+    }
+
+    .top-bar {
+        grid-column: 1 / 13;
+        grid-row: 1 / 2;  
+    }
+
+    .left-sidebar {
+        grid-column: 1 / 3;
+        grid-row: 2 / 13; 
+    }
+
+    .center-panel {
+        grid-column: 3 / 10;
+        grid-row: 2 / 10;   
+    }
+
+    .right-sidebar {
+        grid-column: 10 / 13;  
+        grid-row: 2 / 10; 
+    }
+
+    .bottom-bar {
+        grid-column: 3 / 13; 
+        grid-row: 10 / 13;   
+    }
+
+}
+}
+ 

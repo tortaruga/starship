@@ -4,7 +4,7 @@ const commandInput = document.getElementById('command-line');
 const consoleScreen = document.querySelector('.console');
 const maxMessages = 10;
 
-const notificationSound = new Audio('./assets/notification.wav');
+const notificationSound = new Audio('./assets/sound-effects/notification.wav');
 
 export function handleMessages() {
     while (consoleScreen.children.length >= maxMessages) {
@@ -73,7 +73,7 @@ function handleCommand(command) {
 }
 
 function help() {
-    document.querySelector('.console').innerHTML += `<ul class="command-list">
+    const content = `<ul class="command-list">
                         <li>type one of these commands:</li>
                         <li>- greet crew</li>
                         <li>- check vitals</li>
@@ -81,6 +81,7 @@ function help() {
                         <li>- roam ship</li>
                         <li>- throw party</li>
                     </ul>`;
+    createWrapper(content, consoleScreen);
 }
 
 function roamShip() {
@@ -93,9 +94,9 @@ function randomMission() {
     const randomMission = starship.missions[missionsArr[Math.floor(Math.random() * missionsArr.length)]].outcome(starship);
     createWrapper(randomMission.message, consoleScreen); 
 
-    const coinNotification = new Audio('./assets/coins.wav');
-    const laserGun = new Audio('./assets/laser-gun.wav');
-    const gunFight = new Audio('./assets/gun-fight.wav');
+    const coinNotification = new Audio('./assets/sound-effects/coins.wav');
+    const laserGun = new Audio('./assets/sound-effects/laser-gun.wav');
+    const gunFight = new Audio('./assets/sound-effects/gun-fight.wav');
     if (randomMission.earnedMoney && isSoundOn()) coinNotification.play();
     if (randomMission.police && isSoundOn()) laserGun.play();
     if (randomMission.fight && isSoundOn()) gunFight.play();

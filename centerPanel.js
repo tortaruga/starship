@@ -208,13 +208,13 @@ function populateMissionCard(id) {
 
         handleMessages();
 
-        const coinNotification = new Audio('./assets/coins.wav');
+        const coinNotification = new Audio('./assets/sound-effects/coins.wav');
        
         if (result.earnedMoney && isSoundOn()) coinNotification.play();
-        const laserGun = new Audio('./assets/laser-gun.wav');
-        const gunFight = new Audio('./assets/gun-fight.wav');
+        const laserGun = new Audio('./assets/sound-effects/laser-gun.wav');
+        const gunFight = new Audio('./assets/sound-effects/gun-fight.wav');
         if (randomMission.police  && isSoundOn()) laserGun.play();
-        if (randomMission.fight  && isSoundOn()) gunFight.play();
+        if (randomMission.fight  && isSoundOn()) gunFight.play(); 
          
     }
 }

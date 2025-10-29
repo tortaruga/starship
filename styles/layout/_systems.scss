@@ -1,4 +1,4 @@
-@import '_colors.scss';
+@use '../base';
 
 
 // ship system
@@ -12,30 +12,29 @@
 .stats-hull,
 .stats-ammo,
 .stats-morale { 
-    display: flex; 
-    align-items: center;
+    @include base.flex(flex-start, center);
     gap: 1rem; 
     margin-bottom: .75rem; 
 }
 
 .stats-speed span {
-    color: $neon-pink; 
+    color: base.$neon-pink; 
 }
 
 .good {
-    color: $neon-green; 
+    color: base.$neon-green; 
 }
 
 .cautions {
-    color: $yellow;
+    color: base.$yellow;
 }
 
 .critical {
-    color: $orange; 
+    color: base.$orange; 
 }
 
 .glitch {
-    color: $neon-pink;
+    color: base.$neon-pink;
 }
 
 .bar-visualizer {
@@ -49,31 +48,31 @@
     --fill: 0;
     width: 10px;    
     height: 100%; 
-    background-color: $medium;   
+    background-color: base.$medium;   
     display: inline-block; 
-    background: linear-gradient(to right, $neon-green var(--fill), $medium var(--fill));
+    background: linear-gradient(to right, base.$neon-green var(--fill), base.$medium var(--fill));
     transition: .8s; 
 } 
 
 .bar.complete {
-    background-color: $neon-green;    
+    background-color: base.$neon-green;    
     box-shadow: 0 0 5px;
 } 
 
 .level-visualizer {
     width: 150px;
     height: 10px;
-    background-color: $medium; 
+    background-color: base.$medium; 
     position: relative;
 }
 
 .inner-level {
-    background-color: $purple;  
+    background-color: base.$purple;  
     height: 100%;  
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: 0 0 5px $purple; 
+    box-shadow: 0 0 5px base.$purple; 
     transition: .8s; 
 }
 

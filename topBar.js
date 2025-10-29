@@ -3,7 +3,7 @@ import { isSoundOn } from "./functions.js";
 const discoSwitch = document.getElementById('disco-switch');
 
 const navBtns = document.querySelectorAll('.left-sidebar li, .collapsible-nav li');
-const discoBeat = new Audio('./assets/disco-beat.wav'); 
+const discoBeat = new Audio('./assets/sound-effects/disco-beat.wav'); 
 
 discoSwitch.addEventListener('click', handleDisco);
 
