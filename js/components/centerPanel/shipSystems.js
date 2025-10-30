@@ -1,4 +1,4 @@
-import { engineStates } from "./engineStates.js";
+import { engineStates } from "../../constants/spaceshipStates.js";
 
 export function updateStats(ship) {
 
@@ -70,21 +70,4 @@ function createLevelVisualizer(value, element) {
     el.setAttribute('aria-valuenow', value); 
 }
 
-export function handleNegativeLevel(stat) {
-  if (stat < 0) stat = 0;
-  return stat;
-}
 
-
-export function randomColorClass() {
-  const colorClasses = [ 'green', 'pink', 'yellow', 'orange'];
-  const randomIndex = Math.floor(Math.random() * colorClasses.length);
-  return colorClasses[randomIndex];
-}
-
-
-const soundToggle = document.querySelector('.switch input');
-
-export function isSoundOn() {
-  return soundToggle.checked;
-}

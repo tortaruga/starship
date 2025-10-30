@@ -1,20 +1,10 @@
-import { isSoundOn, randomColorClass, updateStats } from "./functions.js";
-import { starship } from "./starship.js";
-const commandInput = document.getElementById('command-line');
-const consoleScreen = document.querySelector('.console');
-const maxMessages = 10;
+import { createWrapper, randomColorClass, isSoundOn } from "../reusableFunctions.js";
+import { updateStats } from "./centerPanel/shipSystems.js";
+import { starship } from "../constants/starship.js";
+import { coinNotification, gunFight, laserGun } from "../constants/audios.js";
+import { commandInput, consoleScreen } from "../constants/DOMvars.js";
+import { handleMessages } from "../reusableFunctions.js";
 
-const notificationSound = new Audio('./assets/sound-effects/notification.wav');
-
-export function handleMessages() {
-    while (consoleScreen.children.length >= maxMessages) {
-    consoleScreen.removeChild(consoleScreen.firstChild);
-  }
-  // Scroll to bottom 
-  consoleScreen.scrollTop = consoleScreen.scrollHeight;    
-  if (isSoundOn()) notificationSound.play();
- 
-}
 
 commandInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -67,7 +57,7 @@ function handleCommand(command) {
         return;
     }
 
-    consoleScreen.innerHTML += '<p>Invalid command. Check spelling or type "help"</p>';
+    createWrapper('<p>Invalid command. Check spelling or type "help"</p>', consoleScreen);
     handleMessages();
     
 }
@@ -94,9 +84,6 @@ function randomMission() {
     const randomMission = starship.missions[missionsArr[Math.floor(Math.random() * missionsArr.length)]].outcome(starship);
     createWrapper(randomMission.message, consoleScreen); 
 
-    const coinNotification = new Audio('./assets/sound-effects/coins.wav');
-    const laserGun = new Audio('./assets/sound-effects/laser-gun.wav');
-    const gunFight = new Audio('./assets/sound-effects/gun-fight.wav');
     if (randomMission.earnedMoney && isSoundOn()) coinNotification.play();
     if (randomMission.police && isSoundOn()) laserGun.play();
     if (randomMission.fight && isSoundOn()) gunFight.play();
@@ -117,9 +104,3 @@ function throwParty() {
 }
 
 
-export function createWrapper(content, parent) {
-   const wrapper = document.createElement('div');
-   wrapper.classList.add('wrapper-div');
-   parent.appendChild(wrapper);
-   wrapper.innerHTML = content;
-}

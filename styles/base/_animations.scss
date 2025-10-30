@@ -59,11 +59,11 @@
 
 @keyframes discoBg {
     5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
-        background-color: base.$neon-pink;
+        background-color: colors.$neon-pink; 
     }
 
     13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90%  {
-        background-color: base.$dark; 
+        background-color: colors.$dark; 
     }
 }
 

@@ -1,10 +1,4 @@
-import "./currentStatus.js";
-import "./navLogic.js";
-import "./centerPanel.js";
-import './bottomBar.js'; 
-import './commandConsole.js'; 
-import './topBar.js';
-
+// remove outline from input when clicked but retain it when navigating through keyboard
 
 function handleFirstTab(e) {
     if (e.key === 'Tab') {
@@ -12,18 +6,12 @@ function handleFirstTab(e) {
       window.removeEventListener('keydown', handleFirstTab);
       window.addEventListener('mousedown', handleMouseDownOnce);
     }
-  }
+}
  
-  function handleMouseDownOnce() {
+function handleMouseDownOnce() {
     document.body.classList.remove('keyboard-navigation');
     window.removeEventListener('mousedown', handleMouseDownOnce);
     window.addEventListener('keydown', handleFirstTab);
-  }
+}
 
-  window.addEventListener('keydown', handleFirstTab);
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.remove('loading');
-});
+ window.addEventListener('keydown', handleFirstTab);

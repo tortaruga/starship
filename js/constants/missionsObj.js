@@ -1,6 +1,6 @@
-import { updateItemAmount } from "./centerPanel.js";
-import { updateStats, handleNegativeLevel, randomColorClass } from "./functions.js"; 
-
+import { updateItemAmount, handleNegativeLevel, randomColorClass } from "../reusableFunctions.js";
+import { updateStats } from "../components/centerPanel/shipSystems.js";
+ 
 export default {
     supplies: {
     objective: 'Retrieve supplies and fuel from Planet Base.',
@@ -12,8 +12,8 @@ export default {
       ship.technical_stats.ammo_levels = 100;
       ship.inventory.find(item => item.item === 'space rum').amount += 15;
   
-      updateStats(ship);
-      updateItemAmount(ship.inventory.find(item => item.item === 'space rum'), ship);
+      updateStats(ship); // update visual indicators in ship system panel
+      updateItemAmount(ship.inventory.find(item => item.item === 'space rum'), ship); // update amount displayed in cargo panel
       let result = missionInfo + `<p><span class="emoji">✨</span> Fuel tank full, and booze stash replenished!<p> <p class="${randomColorClass()}">Fuel level: 100%</p> <p class="${randomColorClass()}">space rum: +15</p> <p class="${randomColorClass()}">Ammo: 100%</p>`;
       return {message: result, earnedMoney: null}
   }
@@ -41,8 +41,9 @@ explore: {
       ship.inventory.find(item => item.item === 'artifact').amount += 1;
       ship.technical_stats.fuel_level -= randomFuel;
       ship.technical_stats.ammo_levels -= randomAmmo;
-      handleNegativeLevel(ship.technical_stats.fuel_level);
-      handleNegativeLevel(ship.technical_stats.ammo_levels);
+      
+      ship.technical_stats.fuel_level = handleNegativeLevel(ship.technical_stats.fuel_level);
+      ship.technical_stats.ammo_levels = handleNegativeLevel(ship.technical_stats.ammo_levels);
       earnedMoney = true;
       missionInfo += `<p>Well done, gang, we got some gold and a new artifact! <span class="emoji">✌️</span></p> <p class="${randomColorClass()}">credit: +${randomGold}</p> <p class="${randomColorClass()}">Fuel level: -${randomFuel}%</p> <p class="${randomColorClass()}">Artifacts: +1</p> <p class="${randomColorClass()}">Ammo: -${randomAmmo}%</p>`;
     } else {
@@ -92,7 +93,7 @@ explore: {
     }, 1000);
 
     updateItemAmount(ship.inventory.find(item => item.item === 'credits'), ship);
-    updateItemAmount(ship.inventory.find(item => item.item === 'artifact'), ship);
+    updateItemAmount(ship.inventory.find(item => item.item === 'artifact'), ship); 
     updateStats(ship);
 
     return {message: missionInfo, earnedMoney: earnedMoney, police: police, fight: fight};

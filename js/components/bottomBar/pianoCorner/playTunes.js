@@ -1,36 +1,5 @@
-// event log
-import { isSoundOn } from "./functions.js";
-
-const events = [
-    'Purple goo detected in Medbay <span class="emoji">🟣</span>',
-    'Space weather report: Solar flares <span class="emoji">🕶️</span>',
-    'Space weather report: ion storms <span class="emoji">⛈️</span>',
-    'Alert: space anomalies <span class="emoji">🚨</span>',
-    'Alert: gravitational well <span class="emoji">🌀</span>',
-    'Minor fire flaring up in engine room (again) <span class="emoji">🧯</span>',
-    'Reminder: it\'s Byte\'s turn to do the dishes <span class="emoji">🧼</span>',
-    'Alert: spacedust storm incoming <span class="emoji">💨</span>',
-    'Space weather report: diamond rain expected on Planet Base <span class="emoji">☔</span>',
-    'Traffic report: an accident caused a 60km queue near Kora Gamma <span class="emoji">💥</span>',
-    'Traffic report: heavy traffic on Rocky Highway <span class="emoji">🚥</span>',
-];
-
-const intervalTime = 1000 * 60 * 1.2;
-
-function showEvent() {
-    const randomIndex = Math.floor(Math.random() * events.length);
-    document.getElementById('event-log-message').innerHTML = events[randomIndex];
-}
-
-setInterval(showEvent, intervalTime);
-
-showEvent();
-
-// doc's piano corner
-
-const pianoBtn = document.getElementById('piano-btn');
-const tuneBtns = document.querySelectorAll('.select-tune button');
-const infoBtn = document.getElementById('info-btn');
+import { tuneBtns, pianoBtn, pianoKeys, infoBtn } from "../../../constants/DOMvars.js";
+import { isSoundOn } from "../../../reusableFunctions.js";
 
 const tunes = {
   sadTune: {
@@ -115,7 +84,6 @@ pianoBtn.addEventListener('click', () => {
     }
 })
 
-const pianoKeys = document.querySelectorAll('.piano button');
 let animationInterval = null; 
 
 function animateMultipleKeys(count = 2) {
@@ -185,24 +153,3 @@ function closeModal() {
 }
 
 document.querySelector('.track-credits-modal .close').addEventListener('click', closeModal);
-
-const keyAudios = {
-  a: './assets/piano-notes/piano-a.mp3', 
-  b: './assets/piano-notes/piano-b.mp3',
-  c: './assets/piano-notes/piano-c.mp3',
-  d: './assets/piano-notes/piano-d.mp3',
-  e: './assets/piano-notes/piano-e.mp3',
-  f: './assets/piano-notes/piano-f.mp3',
-  g: './assets/piano-notes/piano-g.mp3',
-  'd-flat': './assets/piano-notes/piano-db.mp3',
-  'e-flat': './assets/piano-notes/piano-eb.mp3',
-  'g-flat': './assets/piano-notes/piano-gb.mp3',
-  'a-flat': './assets/piano-notes/piano-ab.mp3',
-  'b-flat': './assets/piano-notes/piano-bb.mp3', 
-}  
-
-pianoKeys.forEach(key => key.addEventListener('click', (e) => {
-  // check id
-  const id = e.target.id;
-  if (isSoundOn()) new Audio(keyAudios[id]).play();  
-}))

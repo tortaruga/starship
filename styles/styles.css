@@ -33,6 +33,14 @@
     background-color: #ffec70;
   }
 }
+@keyframes discoBg {
+  5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
+    background-color: #ff54a6;
+  }
+  13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90% {
+    background-color: #002439;
+  }
+}
 .bottom-bar {
   display: flex;
   flex-direction: row;
@@ -281,6 +289,14 @@
     background-color: #ffec70;
   }
 }
+@keyframes discoBg {
+  5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
+    background-color: #ff54a6;
+  }
+  13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90% {
+    background-color: #002439;
+  }
+}
 .command-line {
   min-height: 200px;
   display: flex;
@@ -395,6 +411,16 @@ body.keyboard-navigation input:focus {
     padding: 1.5rem;
   }
 }
+footer {
+  margin-top: 3rem;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+footer a {
+  color: #ff54a6;
+}
+
 #generic-info span {
   color: #ff54a6;
   text-transform: uppercase;
@@ -446,6 +472,14 @@ body.keyboard-navigation input:focus {
   }
   15%, 25%, 35%, 45%, 55%, 65%, 90% {
     background-color: #ffec70;
+  }
+}
+@keyframes discoBg {
+  5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
+    background-color: #ff54a6;
+  }
+  13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90% {
+    background-color: #002439;
   }
 }
 * {
@@ -692,6 +726,14 @@ ul {
     background-color: #ffec70;
   }
 }
+@keyframes discoBg {
+  5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
+    background-color: #ff54a6;
+  }
+  13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90% {
+    background-color: #002439;
+  }
+}
 .left-sidebar ul,
 .collapsible-nav ul {
   display: flex;
@@ -815,6 +857,12 @@ ul {
 }
 #settings-info h3 {
   color: #81ec86;
+}
+
+.credits-settings {
+  background-color: rgba(4, 8, 35, 0.6);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
 }
 
 .credits-settings p {
@@ -1018,65 +1066,6 @@ input:checked + .slider:before {
     letter-spacing: 0.1rem;
   }
 }
-.container {
-  background-color: #040823;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.top-bar,
-.left-sidebar,
-.right-sidebar,
-.bottom-bar,
-.center-panel,
-.collapsible-nav {
-  background-color: #002439;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  overflow: auto;
-  max-height: 500px;
-}
-
-.left-sidebar {
-  display: none;
-}
-
-.center-panel.disco {
-  animation: discoBg 8s;
-}
-
-@keyframes discoBg {
-  5%, 15%, 25%, 40%, 50%, 70%, 80%, 87%, 95% {
-    background-color: #ff54a6;
-  }
-  13%, 17%, 20%, 30%, 43%, 53%, 75%, 83%, 90% {
-    background-color: #002439;
-  }
-}
-.wrapper-div {
-  margin-block-end: 3rem;
-}
-
-*::-webkit-scrollbar {
-  width: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: rgba(4, 8, 35, 0.6);
-  border-radius: 4px;
-}
-
-*::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(4, 8, 35, 0.6) transparent;
-}
-
 @media screen and (min-width: 1000px) {
   body {
     font-size: 1.1rem;

@@ -1,54 +1,20 @@
+// data
 import crewData from "./crewData.js";
 import shipSpacesData from "./shipSpacesData.js";
 import locationsData from "./locationsData.js";
-import missions from "./missions.js";
-import { isSoundOn, randomColorClass } from "./functions.js";
-import { engineStates } from "./engineStates.js";
-import { createWrapper } from "./commandConsole.js";
-const consoleScreen = document.querySelector('.console');
+import missions from "./missionsObj.js";
+import { engineStates } from "./spaceshipStates.js"; 
 
-// classes
-class ShipRoom {
-    constructor({name, description, action}) {
-        this.name = name;
-        this.description = description;
-        this.action = action;
-    }
+// functions
+import { isSoundOn, randomColorClass, createWrapper, updateItemAmount } from "../reusableFunctions.js";
 
-    goTo() { 
-        return `You're in the ${this.name}. ${this.action}`;
-    }
-}
+// vars
+import { breakdown } from "./audios.js";
+import { consoleScreen } from "./DOMvars.js";
 
-class Location {
-    constructor({name, description}) {
-        this.name = name;
-        this.description = description;
-    }
-}
+//classes
+import { Item, ShipRoom, CrewMember, Location } from "./classes.js";
 
-class CrewMember {
-    constructor({name, role, description, catchphrase, drunken_message}) {
-        this.name = name;
-        this.role = role;
-        this.description = description;
-        this.catchphrase = catchphrase; 
-        this.drunken_message = drunken_message;
-    }
-
-    talk() {
-        return this.catchphrase;
-    }
-};
-
-class Item {
-    constructor(item, description, amount, tag) {
-        this.item = item;
-        this.description = description;
-        this.amount = amount;
-        this.tag = tag;
-    }
-}
 
 // starship object
 export const starship = {
@@ -114,7 +80,8 @@ export const starship = {
             } else {
                 this.technical_stats.crew_morale += Math.ceil(Math.random() * (30 - 15) + 15);
                 this.inventory.find(item => item.item === 'space rum').amount -= boozeUsed;
-                
+                updateItemAmount(this.inventory.find(item => item.item === 'space rum'), this);
+
                 if (this.technical_stats.crew_morale > 100) {
                     this.technical_stats.crew_morale = 100;
                 }
@@ -148,7 +115,6 @@ export const starship = {
         if (this.technical_stats.hull_integrity <= 0 || this.technical_stats.shield_strength <= 0) {
             createWrapper(`<p class="purple"><span class="emoji">⚠️</span> Too much damage, the ship is in critical condition</p>`, consoleScreen);
             consoleScreen.scrollTop = consoleScreen.scrollHeight;
-            const breakdown = new Audio('./assets/sound-effects/breakdown.wav');
             if (isSoundOn()) breakdown.play();
         }
     },
