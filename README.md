@@ -89,6 +89,11 @@ I'm sure I read about this when first studying the difference between block and 
 
 Apparently having 2646862143456 js files where things are being exported and imported wherever without rhyme or reason results in this very curious situation in which two modules depend on each other and I keep getting the error "Cannot access variable before initialization". Interesting. 
 
+6. asset paths in JS
+
+So. It turns out that paths in Js have to be relative to the html file that loads the main js file, and *not* the js file they are being used in. 
+So after organizing all files into folders I spent all that time hunting and fixing file paths only to not have it work once I deployed the project, because the paths were correct all along. Nice to know. 
+
 ## License
 
 Code: [MIT License](./LICENSE)  
